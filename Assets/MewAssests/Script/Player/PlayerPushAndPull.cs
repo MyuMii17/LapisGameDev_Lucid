@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class PlayerPushAndPull : MonoBehaviour
 {
-    [SerializeField]private PlayerController playerController; 
+    private PlayerController playerController; 
+    public GameObject target;
     public bool isInteract;
     public IInteractable currentInteractable;   
     void Awake()
     {
-        
+        playerController = GetComponentInParent<PlayerController>();
     }
     void Update()
     {
@@ -21,7 +22,7 @@ public class PlayerPushAndPull : MonoBehaviour
             IInteractable interactable = other.GetComponentInParent<IInteractable>();
 
             if (interactable == null) return;
-
+            target = other.gameObject;
             currentInteractable = interactable;
         } 
     }
@@ -32,7 +33,7 @@ public class PlayerPushAndPull : MonoBehaviour
             IInteractable interactable = other.GetComponentInParent<IInteractable>();
 
             if (interactable == null) return;
-
+            target = other.gameObject;
             currentInteractable = interactable;
         } 
     }
@@ -41,6 +42,7 @@ public class PlayerPushAndPull : MonoBehaviour
     {
         if (other.CompareTag("Box") && currentInteractable != null && !isInteract)
         {
+            target = null;
             currentInteractable = null;
         } 
     }
@@ -48,9 +50,4 @@ public class PlayerPushAndPull : MonoBehaviour
     {
         currentInteractable.OnInteract(gameObject);
     }
-
-    // void OnDrawGizmosSelected()
-    // {
-    //     Gizmos.DrawWireSphere(interactPosition, sphereSize);
-    // }
 }

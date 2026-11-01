@@ -15,6 +15,7 @@ public class PlayerDetectionGround : MonoBehaviour
             player.move.IsGrounded = true;
             player.move.IsJumping = false;
             player.move.CanJump = true;
+            player.move.IsWalljump = false;
         }
     }
 }

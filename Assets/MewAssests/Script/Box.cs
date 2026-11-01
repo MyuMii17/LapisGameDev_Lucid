@@ -28,7 +28,7 @@ public class Box : MonoBehaviour, IInteractable
 
         if(player.isInteract == true && isGrounded)
         {
-            rb.linearVelocity = playerController.move.MoveDirection * (playerController.move.MovePower + 0.1f);
+            rb.linearVelocity = playerController.move.IsWalking? (playerController.move.MoveDirection * (playerController.move.MovePower + 0.1f)) : Vector3.zero;
         }
         else if(!isGrounded || (player.isInteract == false && !isReset))
         {
@@ -47,15 +47,14 @@ public class Box : MonoBehaviour, IInteractable
     {
         if(!isGrounded) return;
 
-        getInteract = !getInteract;
+        playerController = interactor.GetComponentInParent<PlayerController>();
+        getInteract = playerController.push.IsHold;
 
         player = interactor.GetComponentInParent<PlayerPushAndPull>();
         player.isInteract = getInteract;
         isReset = false;
 
         if(getInteract == false) return;
-
-        playerController = interactor.GetComponentInParent<PlayerController>();
 
         rb.mass = minMass;
     }
