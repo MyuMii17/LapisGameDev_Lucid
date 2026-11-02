@@ -8,9 +8,9 @@ public class Movement
     [Header("Movement Setting")]
     public Vector3 MoveDirection;
     public float MovePower;
-    public float TotalJumpPower;
     public float WalkSpeed;
-    public float RunMultipiler;
+    public float RunMultiplier;
+    public float TotalJumpPower;
     public float JumpPower;
     public float WallJumpMultiplier;
 
