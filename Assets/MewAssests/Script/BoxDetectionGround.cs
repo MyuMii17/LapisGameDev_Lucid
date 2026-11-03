@@ -2,26 +2,26 @@ using UnityEngine;
 
 public class BoxDetectionGround : MonoBehaviour
 {
-    private Box box;
+    private PushObject pushObject;
     void Awake()
     {
-        box = gameObject.GetComponentInParent<Box>();
+        pushObject = gameObject.GetComponentInParent<PushObject>();
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Ground"))
         {
-            box.isGrounded = true;
-            box.isReset = false;
+            pushObject.isGrounded = true;
+            pushObject.isReset = false;
         }
     }
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Ground"))
         {
-            box.isGrounded = false;
-            box.getInteract = false;
+            pushObject.isGrounded = false;
+            pushObject.getInteract = false;
         }
     }
 }

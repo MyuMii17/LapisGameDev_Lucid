@@ -8,7 +8,7 @@ public class PlayerController : Controller
 {
     private Rigidbody rb;
     private InputAction moveAction;
-    private Vector3 currentRotatiion;
+    private Vector3 currentRotation;
     private RaycastHit hit;
     public Movement move;
     public PushInteract push;
@@ -21,6 +21,7 @@ public class PlayerController : Controller
     {
         rb = GetComponent<Rigidbody>();
         moveAction = InputSystem.actions.FindAction("Move");
+        move.CurruntCrouchSizeY = transform.localScale.y;
     }
 
     // Update is called once per frame
@@ -34,6 +35,8 @@ public class PlayerController : Controller
 
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, move.RotationSpeed * move.RotationSmoothSpeed * Time.deltaTime);
         }
+
+        transform.localScale = new Vector3(transform.localScale.x, move.IsCrouching? move.CurruntCrouchSizeY - move.CrouchSizeModifier : move.CurruntCrouchSizeY, transform.localScale.z);
         
     }
     void FixedUpdate()
@@ -52,7 +55,7 @@ public class PlayerController : Controller
         // }
         if (move.IsWalking)
         {
-            move.MovePower = move.WalkSpeed * (push.IsHold || climb.IsHold? 0.5f : (move.IsRunning? move.RunMultipiler : 1));
+            move.MovePower = move.WalkSpeed * (push.IsHold || climb.IsHold || move.IsCrouching? 0.5f : (move.IsRunning? move.RunMultiplier : 1));
 
             Vector3 velocity = rb.linearVelocity;
             velocity.x = move.MovePower * move.MoveDirection.x;

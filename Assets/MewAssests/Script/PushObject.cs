@@ -1,14 +1,12 @@
 using UnityEditor.Build.Player;
 using UnityEngine;
 
-public class Box : MonoBehaviour, IInteractable
+public class PushObject : InteractionObject
 {
-    private PlayerController playerController;
-    private PlayerPushAndPull player;
-    private Rigidbody rb;
-    public float maxMass;
-    public float minMass;
-    public bool getInteract;
+    protected PlayerPush playerPush;
+    protected Rigidbody rb;
+    protected float maxMass;
+    protected float minMass;
     public bool isReset;
     public bool isGrounded;
     void Awake()
@@ -16,42 +14,38 @@ public class Box : MonoBehaviour, IInteractable
         rb = GetComponent<Rigidbody>();
         maxMass = rb.mass;
     }
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        if(player == null || playerController == null) return;
+        if(playerPush == null) return;
 
-        if(player.isInteract == true && isGrounded)
+        if(playerPush.isInteract == true && isGrounded)
         {
             rb.linearVelocity = playerController.move.IsWalking? (playerController.move.MoveDirection * (playerController.move.MovePower + 0.1f)) : Vector3.zero;
         }
-        else if(!isGrounded || (player.isInteract == false && !isReset))
+        else if(!isGrounded || (playerPush.isInteract == false && !isReset))
         {
-            player.isInteract = false;
+            playerPush.isInteract = false;
             playerController.push.IsHold = false;
 
             rb.linearVelocity = Vector3.zero;
             rb.mass = maxMass;
             isReset = true;
 
-            player = null;
+            playerPush = null;
             playerController = null;
         }
     }
-    public void OnInteract(GameObject interactor)
+    public override void GetInteract(GameObject interactor)
     {
         if(!isGrounded) return;
 
-        playerController = interactor.GetComponentInParent<PlayerController>();
+        player = interactor;
+        playerController = interactor.GetComponentInChildren<PlayerController>();
+        playerPush = interactor.GetComponentInChildren<PlayerPush>();
         getInteract = playerController.push.IsHold;
 
-        player = interactor.GetComponentInParent<PlayerPushAndPull>();
-        player.isInteract = getInteract;
+        playerPush.isInteract = getInteract;
         isReset = false;
 
         if(getInteract == false) return;

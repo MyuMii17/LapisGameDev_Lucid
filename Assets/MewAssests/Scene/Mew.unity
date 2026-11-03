@@ -152,8 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2dcd24a1f6d6504b9844cd675467629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Box
-  maxMass: 15
-  minMass: 1
   getInteract: 0
   isReset: 0
   isGrounded: 0
@@ -272,7 +270,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.99, y: 1.84, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1123544355}
@@ -358,9 +356,9 @@ GameObject:
   - component: {fileID: 431952121}
   - component: {fileID: 431952120}
   - component: {fileID: 431952119}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Box
-  m_TagString: Edge
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -479,8 +477,8 @@ Transform:
   m_GameObject: {fileID: 431952118}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.99, y: 2.37, z: 3.64}
-  m_LocalScale: {x: 5, y: 2, z: 1}
+  m_LocalPosition: {x: 1.99, y: 2.69, z: 3.64}
+  m_LocalScale: {x: 5, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1933138466}
@@ -531,7 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d39d8af5cad15e48b810e09d1399f0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPushAndPull
-  target: {fileID: 0}
+  targetTag: Box
   isInteract: 0
 --- !u!135 &458123528
 SphereCollider:
@@ -679,9 +677,9 @@ GameObject:
   - component: {fileID: 880548709}
   - component: {fileID: 880548708}
   - component: {fileID: 880548707}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Box (1)
-  m_TagString: Edge
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -982,19 +980,21 @@ MonoBehaviour:
   move:
     MoveDirection: {x: 0, y: 0, z: 0}
     MovePower: 0
-    TotalJumpPower: 0
     WalkSpeed: 2
-    RunMultipiler: 2
+    RunMultiplier: 2
+    TotalJumpPower: 0
     JumpPower: 5
     WallJumpMultiplier: 1.25
     RotationSpeed: 5
     RotationSmoothSpeed: 2
+    CurruntCrouchSizeY: 1
+    CrouchSizeModifier: 0.25
     IsWalking: 0
     IsRunning: 0
     IsJumping: 0
     IsWalljump: 0
     CanJump: 0
-    IsClimbing: 0
+    IsCrouching: 0
     IsGrounded: 0
   push:
     IsHold: 0
@@ -1130,7 +1130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d74a1c0c72a63a419a60b8173e25b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerClimb
-  target: {fileID: 0}
+  targetTag: Edge
   isInteract: 0
 --- !u!65 &1093886066
 BoxCollider:
@@ -1589,8 +1589,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.5, z: 1.75}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 1, y: 0.75, z: 1.75}
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!114 &1933138468
 MonoBehaviour:
   m_ObjectHideFlags: 0

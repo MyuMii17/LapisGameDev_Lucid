@@ -5,16 +5,17 @@ public class InputHandler : MonoBehaviour
 {
     //private ICommand moveCommand; Interesting Idea
     private PlayerController playerController;
-    private PlayerPushAndPull pushAndPull;
+    private PlayerPush playerPush;
     private PlayerClimb playerClimb;
     private InputAction moveAction;
     private InputAction runAction;
     private InputAction jumpAction;
     private InputAction interactAction;
+    private InputAction crouchAction;
     void Awake()
     {
         playerController = GetComponent<PlayerController>();
-        pushAndPull = GetComponentInChildren<PlayerPushAndPull>();
+        playerPush = GetComponentInChildren<PlayerPush>();
         playerClimb = GetComponentInChildren<PlayerClimb>();
     }
 
@@ -26,6 +27,7 @@ public class InputHandler : MonoBehaviour
         runAction = InputSystem.actions.FindAction("Run");
         jumpAction = InputSystem.actions.FindAction("Jump");
         interactAction = InputSystem.actions.FindAction("Interact");
+        crouchAction = InputSystem.actions.FindAction("Crouch");
     }
 
     void Update()
@@ -53,16 +55,15 @@ public class InputHandler : MonoBehaviour
             }
         }
 
-        if (interactAction.triggered && pushAndPull.currentInteractable != null && playerClimb.currentInteractable == null && !playerController.move.IsJumping)
+        if (interactAction.triggered && playerPush.currentInteractable != null && playerClimb.currentInteractable == null && !playerController.move.IsJumping)
         {
             playerController.push.IsHold = !playerController.push.IsHold;
 
-            pushAndPull.OnInteract();
+            playerPush.OnInteract();
         }
-        else if(interactAction.triggered && playerClimb.currentInteractable != null && pushAndPull.currentInteractable == null)
+        else if(interactAction.triggered && playerClimb.currentInteractable != null && playerPush.currentInteractable == null)
         {
             playerController.climb.IsHold = !playerController.climb.IsHold;
-            playerController.move.IsClimbing = playerController.climb.IsHold;
             
             playerController.ResetVelocity();
 
@@ -90,6 +91,15 @@ public class InputHandler : MonoBehaviour
             }
             
             playerClimb.OnInteract();
+        }
+
+        if (crouchAction.IsPressed())
+        {
+            playerController.move.IsCrouching = true;
+        }
+        else if (!crouchAction.IsPressed())
+        {
+            playerController.move.IsCrouching = false;
         }
     }
 }

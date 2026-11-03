@@ -18,13 +18,17 @@ public class Movement
     public float RotationSpeed;
     public float RotationSmoothSpeed;
 
+    [Header("Crouch Setting")]
+    public float CurruntCrouchSizeY;
+    public float CrouchSizeModifier;
+
     [Header("State Setting")]
     public bool IsWalking;
     public bool IsRunning;
     public bool IsJumping;
     public bool IsWalljump;
     public bool CanJump;
-    public bool IsClimbing;
+    public bool IsCrouching;
     public bool IsGrounded;
 }
 

@@ -1,43 +1,32 @@
 using UnityEngine;
 
-public class PlayerClimb : MonoBehaviour
+public class PlayerClimb : PlayerInteraction
 {
-    private PlayerController playerController; 
-    public GameObject target;
-    public bool isInteract;
-    public IInteractable currentInteractable;
-    void Awake()
+    protected override void OnTriggerEnter(Collider other)
     {
-        playerController = GetComponentInParent<PlayerController>();
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Edge") && currentInteractable == null)
+        if (other.CompareTag(targetTag) && currentInteractable == null)
         {
             IInteractable interactable = other.GetComponentInParent<IInteractable>();
 
             if (interactable == null) return;
 
-            target = other.gameObject;
             currentInteractable = interactable;
-        } 
+        }
     }
-    void OnTriggerStay(Collider other)
+    protected override void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Edge") && currentInteractable != null)
+        if (other.CompareTag(targetTag) && currentInteractable != null)
         {
             IInteractable interactable = other.GetComponentInParent<IInteractable>();
 
             if (interactable == null) return;
 
-            target = other.gameObject;
             currentInteractable = interactable;
         } 
     }
-
-    void OnTriggerExit(Collider other)
+    protected override void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Edge") && currentInteractable != null)
+        if (other.CompareTag(targetTag) && currentInteractable != null)
         {
             if (playerController.climb.IsHold)
             {
@@ -45,14 +34,14 @@ public class PlayerClimb : MonoBehaviour
                 playerController.ResetVelocity();
                 OnInteract();
             }
-            target = null;
+
             currentInteractable = null;
         } 
     }
 
-    public void OnInteract()
+    public override void OnInteract()
     {
         if(playerController.move.IsJumping) playerController.move.IsJumping = false;
-        currentInteractable.OnInteract(gameObject);
+        currentInteractable.GetInteract(player);
     }
 }
