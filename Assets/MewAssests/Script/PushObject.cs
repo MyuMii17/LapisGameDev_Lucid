@@ -5,8 +5,8 @@ public class PushObject : InteractionObject
 {
     protected PlayerPush playerPush;
     protected Rigidbody rb;
-    protected float maxMass;
-    protected float minMass;
+    public float maxMass;
+    public float minMass;
     public bool isReset;
     public bool isGrounded;
     void Awake()
@@ -21,7 +21,7 @@ public class PushObject : InteractionObject
 
         if(playerPush.isInteract == true && isGrounded)
         {
-            rb.linearVelocity = playerController.move.IsWalking? (playerController.move.MoveDirection * (playerController.move.MovePower + 0.1f)) : Vector3.zero;
+            rb.linearVelocity = playerController.move.IsWalking? (playerController.move.MoveDirection * (playerController.move.MovePower + 0.25f)) : Vector3.zero;
         }
         else if(!isGrounded || (playerPush.isInteract == false && !isReset))
         {

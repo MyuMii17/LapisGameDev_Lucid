@@ -10,7 +10,7 @@ public class ClimbObject : InteractionObject
 
         if(playerClimb.isInteract == true && !playerController.move.IsJumping)
         {
-            player.transform.position = new Vector3(player.transform.position.x, transform.position.y + (transform.position.y / 2), player.transform.position.z);
+            player.transform.position = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
         }
         else if(playerClimb.isInteract == false || playerController.move.IsJumping)
         {

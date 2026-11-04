@@ -12,11 +12,16 @@ public class InputHandler : MonoBehaviour
     private InputAction jumpAction;
     private InputAction interactAction;
     private InputAction crouchAction;
+    public Transform crouchRayPosition;
+    public float rayRange;
+    public int edgeLayer;
+    public bool isCrouchHit;
     void Awake()
     {
         playerController = GetComponent<PlayerController>();
         playerPush = GetComponentInChildren<PlayerPush>();
         playerClimb = GetComponentInChildren<PlayerClimb>();
+        edgeLayer = LayerMask.GetMask("Edge");
     }
 
     void Start()
@@ -93,13 +98,25 @@ public class InputHandler : MonoBehaviour
             playerClimb.OnInteract();
         }
 
+        if (playerController.move.IsCrouching)
+        {
+            isCrouchHit = Physics.Raycast(crouchRayPosition.position, Vector3.up, rayRange, edgeLayer);
+        }
+
         if (crouchAction.IsPressed())
         {
             playerController.move.IsCrouching = true;
         }
-        else if (!crouchAction.IsPressed())
+        else if (!crouchAction.IsPressed() && !isCrouchHit)
         {
             playerController.move.IsCrouching = false;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = isCrouchHit ? Color.red : Color.green; // ถ้าชนจะเป็นสีแดง ถ้าไม่ชนจะเป็นสีเขียว
+
+        Gizmos.DrawLine(crouchRayPosition.position, crouchRayPosition.position + Vector3.up * rayRange);
     }
 }

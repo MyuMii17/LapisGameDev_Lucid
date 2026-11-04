@@ -9,6 +9,9 @@ public class PlayerController : Controller
     private Rigidbody rb;
     private InputAction moveAction;
     private Vector3 currentRotation;
+    private CapsuleCollider collider;
+    [SerializeField]private AnimationClip walkClip;
+    private Animator animator;
     private RaycastHit hit;
     public Movement move;
     public PushInteract push;
@@ -16,6 +19,8 @@ public class PlayerController : Controller
     void Awake()
     {
         climb.ClimbLayer = LayerMask.GetMask("Edge");
+        animator = GetComponent<Animator>();
+        collider = GetComponent<CapsuleCollider>();
     }
     void Start()
     {
@@ -27,6 +32,8 @@ public class PlayerController : Controller
     // Update is called once per frame
     void Update()
     {
+        Animation();
+
         if (move.MoveDirection.sqrMagnitude > 0.01f && !push.IsHold && !climb.IsHold)
         {
             Vector3 movementDirection = new Vector3(move.MoveDirection.x, 0, move.MoveDirection.z);
@@ -36,7 +43,31 @@ public class PlayerController : Controller
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, move.RotationSpeed * move.RotationSmoothSpeed * Time.deltaTime);
         }
 
-        transform.localScale = new Vector3(transform.localScale.x, move.IsCrouching? move.CurruntCrouchSizeY - move.CrouchSizeModifier : move.CurruntCrouchSizeY, transform.localScale.z);
+        if (push.IsHold)
+        {
+            collider.radius = 1;
+        }
+        else if (move.IsCrouching)
+        {
+            if (move.IsWalking)
+            {
+                collider.height = 2.25f;
+                collider.radius = 1.2f;
+                collider.center = new Vector3(collider.center.x, 1.2f, collider.center.z);
+            }
+            else
+            {
+                collider.height = 3;
+                collider.radius = 1;
+                collider.center = new Vector3(collider.center.x, 1.5f, collider.center.z);
+            }
+        }
+        else
+        {
+            collider.radius = 0.5f;
+            collider.height = 4.05f;
+            collider.center = new Vector3(collider.center.x, 2, collider.center.z);
+        }
         
     }
     void FixedUpdate()
@@ -96,5 +127,15 @@ public class PlayerController : Controller
     public void ResetVelocity()
     { 
         rb.linearVelocity = Vector3.zero;
+    }
+    public void Animation()
+    {
+        animator.SetBool("IsMoving", move.IsWalking? true : false);
+        animator.SetBool("IsWalking", move.IsWalking && !move.IsJumping && !push.IsHold && !climb.IsHold? true : false);
+        animator.SetBool("IsRunning",  move.IsRunning && !move.IsJumping && !push.IsHold && !climb.IsHold? true : false);
+        animator.SetBool("IsJumping",  move.IsJumping && !push.IsHold? true : false);
+        animator.SetBool("IsPush",  push.IsHold? true : false);
+        animator.SetBool("IsClimbing",  climb.IsHold? true : false);
+        animator.SetBool("IsCrouch",  move.IsCrouching? true : false);
     }
 }
