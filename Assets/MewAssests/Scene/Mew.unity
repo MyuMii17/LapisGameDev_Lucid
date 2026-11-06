@@ -1099,6 +1099,8 @@ MonoBehaviour:
     IsWalljump: 0
     CanJump: 0
     IsCrouching: 0
+    CanSlide: 0
+    IsSliding: 0
     IsGrounded: 0
   push:
     IsHold: 0
@@ -1110,6 +1112,8 @@ MonoBehaviour:
     RayRange: 2
     RayHeight: 0.75
     ClimbLayer: 0
+  slideInterval: 0
+  slideTime: 0
 --- !u!1 &1057850603
 GameObject:
   m_ObjectHideFlags: 0
@@ -2213,8 +2217,10 @@ MonoBehaviour:
     IsRunning: 0
     IsJumping: 0
     IsWalljump: 0
-    CanJump: 0
+    CanJump: 1
     IsCrouching: 0
+    CanSlide: 1
+    IsSliding: 0
     IsGrounded: 0
   push:
     IsHold: 0
@@ -2226,6 +2232,8 @@ MonoBehaviour:
     RayRange: 2
     RayHeight: 0.75
     ClimbLayer: 0
+  slideInterval: 2
+  slideTime: 0.75
 --- !u!95 &1577533687
 Animator:
   serializedVersion: 7

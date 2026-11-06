@@ -53,6 +53,8 @@ public class InputHandler : MonoBehaviour
 
         if (jumpAction.triggered && playerController.move.CanJump)
         {
+            if(playerController.move.IsSliding) playerController.move.IsSliding = false;
+            
             playerController.move.IsGrounded = false;
             if (playerController.climb.IsHold)
             {
@@ -106,8 +108,9 @@ public class InputHandler : MonoBehaviour
         if (crouchAction.IsPressed())
         {
             playerController.move.IsCrouching = true;
+            if(playerController.move.IsRunning && playerController.move.CanSlide) playerController.move.IsSliding = true;
         }
-        else if (!crouchAction.IsPressed() && !isCrouchHit)
+        else if (!crouchAction.IsPressed() && !isCrouchHit && !playerController.move.IsSliding)
         {
             playerController.move.IsCrouching = false;
         }

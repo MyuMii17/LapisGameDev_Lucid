@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Mathematics;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -16,6 +17,9 @@ public class PlayerController : Controller
     public Movement move;
     public PushInteract push;
     public ClimbInteract climb;
+    private Coroutine slideCoroutine;
+    public float slideInterval;
+    public float slideTime;
     void Awake()
     {
         climb.ClimbLayer = LayerMask.GetMask("Edge");
@@ -34,7 +38,7 @@ public class PlayerController : Controller
     {
         Animation();
 
-        if (move.MoveDirection.sqrMagnitude > 0.01f && !push.IsHold && !climb.IsHold)
+        if (move.MoveDirection.sqrMagnitude > 0.01f && !push.IsHold && !climb.IsHold && !move.IsSliding)
         {
             Vector3 movementDirection = new Vector3(move.MoveDirection.x, 0, move.MoveDirection.z);
 
@@ -68,7 +72,13 @@ public class PlayerController : Controller
             collider.height = 4.05f;
             collider.center = new Vector3(collider.center.x, 2, collider.center.z);
         }
-        
+
+        if (move.IsSliding)
+        {
+            if(slideCoroutine != null) return;
+            
+            slideCoroutine = StartCoroutine(OnSliding());
+        }
     }
     void FixedUpdate()
     {
@@ -84,9 +94,9 @@ public class PlayerController : Controller
         //     transform.rotation = Quaternion.LookRotation(wallDirection);
         //     climb.WallDirection = wallDirection;
         // }
-        if (move.IsWalking)
+        if (move.IsWalking && !move.IsSliding)
         {
-            move.MovePower = move.WalkSpeed * (push.IsHold || climb.IsHold || move.IsCrouching? 0.5f : (move.IsRunning? move.RunMultiplier : 1));
+            move.MovePower = move.WalkSpeed * (push.IsHold || climb.IsHold || (move.IsCrouching && !move.IsSliding)? 0.5f : (move.IsRunning || move.IsSliding? move.RunMultiplier : 1));
 
             Vector3 velocity = rb.linearVelocity;
             velocity.x = move.MovePower * move.MoveDirection.x;
@@ -94,7 +104,7 @@ public class PlayerController : Controller
             
             rb.linearVelocity = velocity;
         }
-        else
+        else if(!move.IsWalking && !move.IsSliding)
         {
             rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
         }
@@ -123,6 +133,17 @@ public class PlayerController : Controller
             move.MoveDirection.z = 0f;
         }
     }
+    IEnumerator OnSliding()
+    {
+        move.CanSlide = false;
+        
+        yield return new WaitForSeconds(slideTime);
+        move.IsSliding = false;
+
+        yield return new WaitForSeconds(slideInterval);
+        move.CanSlide = true;
+        slideCoroutine = null;
+    }
 
     public void ResetVelocity()
     { 
@@ -137,5 +158,6 @@ public class PlayerController : Controller
         animator.SetBool("IsPush",  push.IsHold? true : false);
         animator.SetBool("IsClimbing",  climb.IsHold? true : false);
         animator.SetBool("IsCrouch",  move.IsCrouching? true : false);
+        animator.SetBool("IsSliding",  move.IsSliding? true : false);
     }
 }

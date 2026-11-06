@@ -29,6 +29,8 @@ public class Movement
     public bool IsWalljump;
     public bool CanJump;
     public bool IsCrouching;
+    public bool CanSlide;
+    public bool IsSliding;
     public bool IsGrounded;
 }
 
