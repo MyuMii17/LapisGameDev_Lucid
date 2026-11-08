@@ -17,6 +17,8 @@ public class PlayerController : Controller
     public Movement move;
     public PushInteract push;
     public ClimbInteract climb;
+    public PickInteract pick;
+    public ObjectInteract interact;
     private Coroutine slideCoroutine;
     public float slideInterval;
     public float slideTime;

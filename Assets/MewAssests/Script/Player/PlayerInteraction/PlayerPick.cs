@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerPick : PlayerInteraction
 {
+    public Transform handPosition;
     protected override void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(targetTag) && currentInteractable == null)

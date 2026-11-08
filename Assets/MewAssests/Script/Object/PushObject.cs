@@ -11,7 +11,7 @@ public class PushObject : InteractionObject
     public bool isGrounded;
     void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponentInParent<Rigidbody>();
         maxMass = rb.mass;
     }
 

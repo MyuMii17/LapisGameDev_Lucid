@@ -7,6 +7,8 @@ public class InputHandler : MonoBehaviour
     private PlayerController playerController;
     private PlayerPush playerPush;
     private PlayerClimb playerClimb;
+    private PlayerPick playerPick;
+    private PlayerInteract playerInteract;
     private InputAction moveAction;
     private InputAction runAction;
     private InputAction jumpAction;
@@ -21,7 +23,9 @@ public class InputHandler : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         playerPush = GetComponentInChildren<PlayerPush>();
         playerClimb = GetComponentInChildren<PlayerClimb>();
-        edgeLayer = LayerMask.GetMask("Edge");
+        playerPick = GetComponentInChildren<PlayerPick>();
+        playerInteract = GetComponentInChildren<PlayerInteract>();
+        edgeLayer = LayerMask.GetMask("Climb");
     }
 
     void Start()
@@ -62,13 +66,13 @@ public class InputHandler : MonoBehaviour
             }
         }
 
-        if (interactAction.triggered && playerPush.currentInteractable != null && playerClimb.currentInteractable == null && !playerController.move.IsJumping)
+        if (interactAction.triggered && playerPush.currentInteractable != null && playerClimb.currentInteractable == null && playerInteract.currentInteractable == null && !playerController.move.IsJumping)
         {
             playerController.push.IsHold = !playerController.push.IsHold;
 
             playerPush.OnInteract();
         }
-        else if(interactAction.triggered && playerClimb.currentInteractable != null && playerPush.currentInteractable == null)
+        else if(interactAction.triggered && playerClimb.currentInteractable != null && playerPush.currentInteractable == null && playerInteract.currentInteractable == null)
         {
             playerController.climb.IsHold = !playerController.climb.IsHold;
             
@@ -96,8 +100,14 @@ public class InputHandler : MonoBehaviour
                     transform.rotation = Quaternion.LookRotation(wallDirection);
                 }
             }
-            
             playerClimb.OnInteract();
+        }
+        
+        if (interactAction.triggered && playerPick.currentInteractable != null)
+        {
+            playerController.pick.IsHold = !playerController.pick.IsHold;
+
+            playerPick.OnInteract();
         }
 
         if (playerController.move.IsCrouching)
@@ -118,7 +128,7 @@ public class InputHandler : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = isCrouchHit ? Color.red : Color.green; // ถ้าชนจะเป็นสีแดง ถ้าไม่ชนจะเป็นสีเขียว
+        Gizmos.color = isCrouchHit ? Color.red : Color.green;
 
         Gizmos.DrawLine(crouchRayPosition.position, crouchRayPosition.position + Vector3.up * rayRange);
     }

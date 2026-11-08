@@ -5,7 +5,8 @@ public class BoxDetectionGround : MonoBehaviour
     private PushObject pushObject;
     void Awake()
     {
-        pushObject = gameObject.GetComponentInParent<PushObject>();
+        GameObject main = gameObject.transform.parent.gameObject;
+        pushObject = main.GetComponentInChildren<PushObject>();
     }
 
     void OnTriggerEnter(Collider other)

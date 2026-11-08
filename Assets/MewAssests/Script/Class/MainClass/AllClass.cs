@@ -51,3 +51,17 @@ public class ClimbInteract
     public float RayHeight;
     public int ClimbLayer;
 }
+
+[Serializable]
+public class PickInteract
+{
+    public bool IsHold;
+    public bool CanHold;
+}
+
+[Serializable]
+public class ObjectInteract
+{
+    public bool IsHold;
+    public bool CanHold;
+}
