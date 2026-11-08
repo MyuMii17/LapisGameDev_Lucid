@@ -11,17 +11,18 @@ TagManager:
   - Push
   - Climb
   - Pick
+  - CamPosition
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Camera
   - Water
   - UI
   - Push
   - Climb
-  - 
-  - 
+  - CameraPosition
+  - Player
   - 
   - 
   - 

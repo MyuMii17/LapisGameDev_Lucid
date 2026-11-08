@@ -24,7 +24,7 @@ public class InputHandler : MonoBehaviour
         playerPush = GetComponentInChildren<PlayerPush>();
         playerClimb = GetComponentInChildren<PlayerClimb>();
         playerPick = GetComponentInChildren<PlayerPick>();
-        playerInteract = GetComponentInChildren<PlayerInteract>();
+        //playerInteract = GetComponentInChildren<PlayerInteract>();
         edgeLayer = LayerMask.GetMask("Climb");
     }
 
@@ -66,13 +66,13 @@ public class InputHandler : MonoBehaviour
             }
         }
 
-        if (interactAction.triggered && playerPush.currentInteractable != null && playerClimb.currentInteractable == null && playerInteract.currentInteractable == null && !playerController.move.IsJumping)
+        if (interactAction.triggered && playerPush.currentInteractable != null && playerClimb.currentInteractable == null && playerPick.currentInteractable == null && !playerController.move.IsJumping)
         {
             playerController.push.IsHold = !playerController.push.IsHold;
 
             playerPush.OnInteract();
         }
-        else if(interactAction.triggered && playerClimb.currentInteractable != null && playerPush.currentInteractable == null && playerInteract.currentInteractable == null)
+        else if(interactAction.triggered && playerClimb.currentInteractable != null && playerPush.currentInteractable == null && playerPick.currentInteractable == null)
         {
             playerController.climb.IsHold = !playerController.climb.IsHold;
             
@@ -103,7 +103,7 @@ public class InputHandler : MonoBehaviour
             playerClimb.OnInteract();
         }
         
-        if (interactAction.triggered && playerPick.currentInteractable != null)
+        if (interactAction.triggered && playerPick.currentInteractable != null && CheckAction())
         {
             playerController.pick.IsHold = !playerController.pick.IsHold;
 
@@ -124,6 +124,12 @@ public class InputHandler : MonoBehaviour
         {
             playerController.move.IsCrouching = false;
         }
+    }
+
+    public bool CheckAction()
+    {
+        if(playerController.push.IsHold || playerController.climb.IsHold) return false;
+        return true;
     }
 
     private void OnDrawGizmos()

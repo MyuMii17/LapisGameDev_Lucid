@@ -1,6 +1,17 @@
 using System;
+using JetBrains.Annotations;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+
+[Serializable]
+public class CameraPosition
+{
+    public Transform Position;
+    public float Speed;
+    public float Smooth;
+    public bool CanMove;
+    public Transform NextPosition;
+}
 
 [Serializable]
 public class Movement
