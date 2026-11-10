@@ -16,8 +16,10 @@ public class InputHandler : MonoBehaviour
     private InputAction crouchAction;
     public Transform crouchRayPosition;
     public float rayRange;
-    public int edgeLayer;
+    public int objectLayer;
     public bool isCrouchHit;
+    // public bool isWallHit;
+    // public float wallRayDistance;
     void Awake()
     {
         playerController = GetComponent<PlayerController>();
@@ -25,7 +27,7 @@ public class InputHandler : MonoBehaviour
         playerClimb = GetComponentInChildren<PlayerClimb>();
         playerPick = GetComponentInChildren<PlayerPick>();
         //playerInteract = GetComponentInChildren<PlayerInteract>();
-        edgeLayer = LayerMask.GetMask("Climb");
+        objectLayer = LayerMask.GetMask("Object");
     }
 
     void Start()
@@ -41,12 +43,27 @@ public class InputHandler : MonoBehaviour
 
     void Update()
     {
-        if (moveAction.IsPressed())
+        if (moveAction.IsPressed() && playerController.move.CanMove)
         {
-            playerController.move.IsWalking = true;
+            //Debug.DrawRay(crouchRayPosition.position, playerController.move.MoveDirection * wallRayDistance , Color.red);
+            // if (Physics.Raycast(crouchRayPosition.position, playerController.move.MoveDirection, out RaycastHit hit, wallRayDistance, objectLayer))
+            // {
+            //     isWallHit = true;
+            //     playerController.move.MoveDirection = Vector3.ProjectOnPlane(playerController.move.MoveDirection, hit.normal);
+
+            //     if (Vector3.Dot(playerController.move.MoveDirection, hit.normal) < 0)
+            //     {
+            //         playerController.move.MoveDirection = Vector3.zero;
+            //     }
+            //     return;
+            // }
+            // else
+            // {
+            //     isWallHit = false;
+            // }
 
             playerController.Move();
-            playerController.move.IsRunning = runAction.IsPressed();
+            playerController.move.IsRunning = runAction.IsPressed() && playerController.move.IsWalking;
             // moveCommand.Excute() Interesting Idea
         }
         else
@@ -69,7 +86,23 @@ public class InputHandler : MonoBehaviour
         if (interactAction.triggered && playerPush.currentInteractable != null && playerClimb.currentInteractable == null && playerPick.currentInteractable == null && !playerController.move.IsJumping)
         {
             playerController.push.IsHold = !playerController.push.IsHold;
+            if (playerController.push.IsHold == true)
+            {
+                Vector3 position = transform.position;
+                position.y += playerController.push.RayHeight;
 
+                Debug.DrawRay(position , playerController.move.MoveDirection * playerController.push.RayRange , Color.red);
+                if (Physics.Raycast(position, playerController.move.MoveDirection, out RaycastHit hit, playerController.push.RayRange, objectLayer) && playerController.push.IsHold)
+                {
+                    Vector3 pushDirection = -hit.normal;
+                    pushDirection.y = 0f;
+
+                    playerController.move.MoveDirection = pushDirection;
+                    playerController.push.PushDirection = pushDirection;
+
+                    transform.rotation = Quaternion.LookRotation(pushDirection);
+                }
+            }
             playerPush.OnInteract();
         }
         else if(interactAction.triggered && playerClimb.currentInteractable != null && playerPush.currentInteractable == null && playerPick.currentInteractable == null)
@@ -89,7 +122,7 @@ public class InputHandler : MonoBehaviour
                 position.y += playerController.climb.RayHeight;
 
                 Debug.DrawRay(position , playerController.move.MoveDirection * playerController.climb.RayRange , Color.red);
-                if (Physics.Raycast(position, playerController.move.MoveDirection, out RaycastHit hit, playerController.climb.RayRange, playerController.climb.ClimbLayer) && playerController.climb.IsHold)
+                if (Physics.Raycast(position, playerController.move.MoveDirection, out RaycastHit hit, playerController.climb.RayRange, objectLayer) && playerController.climb.IsHold)
                 {
                     Vector3 wallDirection = -hit.normal;
                     wallDirection.y = 0f;
@@ -112,7 +145,7 @@ public class InputHandler : MonoBehaviour
 
         if (playerController.move.IsCrouching)
         {
-            isCrouchHit = Physics.Raycast(crouchRayPosition.position, Vector3.up, rayRange, edgeLayer);
+            isCrouchHit = Physics.Raycast(crouchRayPosition.position, Vector3.up, rayRange, objectLayer);
         }
 
         if (crouchAction.IsPressed())
@@ -137,5 +170,12 @@ public class InputHandler : MonoBehaviour
         Gizmos.color = isCrouchHit ? Color.red : Color.green;
 
         Gizmos.DrawLine(crouchRayPosition.position, crouchRayPosition.position + Vector3.up * rayRange);
-    }
+
+
+        // if(playerController != null && playerController.move.MoveDirection != Vector3.zero)
+        // {
+        //     Gizmos.color = isWallHit ? Color.red : Color.green;
+        //     Gizmos.DrawLine(crouchRayPosition.position, crouchRayPosition.position + playerController.move.MoveDirection * wallRayDistance);
+        // }
+    }    
 }

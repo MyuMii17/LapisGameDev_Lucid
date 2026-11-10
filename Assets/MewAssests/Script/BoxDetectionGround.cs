@@ -17,6 +17,14 @@ public class BoxDetectionGround : MonoBehaviour
             pushObject.isReset = false;
         }
     }
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Ground"))
+        {
+            pushObject.isGrounded = true;
+            pushObject.isReset = false;
+        }
+    }
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Ground"))

@@ -3,14 +3,20 @@ using UnityEngine;
 public class ClimbObject : InteractionObject
 {
     private PlayerClimb playerClimb;
+    public float rangeY;
+    public bool canClimb;
+    void Awake()
+    {
+        canClimb = true;
+    }
 
     void Update()
     {
-        if(playerClimb == null) return;
+        if(playerClimb == null || !canClimb) return;
 
         if(playerClimb.isInteract == true && !playerController.move.IsJumping)
         {
-            player.transform.position = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+            player.transform.position = new Vector3(player.transform.position.x, transform.position.y - rangeY, player.transform.position.z);
         }
         else if(playerClimb.isInteract == false || playerController.move.IsJumping)
         {

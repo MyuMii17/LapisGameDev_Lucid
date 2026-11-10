@@ -12,6 +12,7 @@ TagManager:
   - Climb
   - Pick
   - CamPosition
+  - PushInvWall
   layers:
   - Default
   - TransparentFX
@@ -23,8 +24,8 @@ TagManager:
   - Climb
   - CameraPosition
   - Player
-  - 
-  - 
+  - Object
+  - PushInvWall
   - 
   - 
   - 

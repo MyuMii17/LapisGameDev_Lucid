@@ -1,4 +1,5 @@
 using System.Collections;
+using NUnit.Framework;
 using Unity.Mathematics;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -24,9 +25,9 @@ public class PlayerController : Controller
     public float slideTime;
     void Awake()
     {
-        climb.ClimbLayer = LayerMask.GetMask("Edge");
         animator = GetComponent<Animator>();
         collider = GetComponent<CapsuleCollider>();
+        move.CanMove = true;
     }
     void Start()
     {
@@ -84,20 +85,8 @@ public class PlayerController : Controller
     }
     void FixedUpdate()
     {
-        // Vector3 position = transform.position;
-        // position.y += climb.RayHeight;
-
-        // Debug.DrawRay(position , move.MoveDirection * climb.RayRange , Color.red);
-        // if (Physics.Raycast(position, move.MoveDirection, out RaycastHit hit, climb.RayRange, climb.ClimbLayer) && climb.IsHold)
-        // {
-        //     Vector3 wallDirection = -hit.normal;
-        //     wallDirection.y = 0f;
-
-        //     transform.rotation = Quaternion.LookRotation(wallDirection);
-        //     climb.WallDirection = wallDirection;
-        // }
         if (move.IsWalking && !move.IsSliding)
-        {
+        {   
             move.MovePower = move.WalkSpeed * (push.IsHold || climb.IsHold || (move.IsCrouching && !move.IsSliding)? 0.5f : (move.IsRunning || move.IsSliding? move.RunMultiplier : 1));
 
             Vector3 velocity = rb.linearVelocity;
@@ -124,16 +113,51 @@ public class PlayerController : Controller
     {
         move.MoveDirection = moveAction.ReadValue<Vector3>();
 
-        if(!climb.IsHold) return;
+        if (push.IsHold)
+        {
+            if(push.PushDirection.x != 0)
+            {
+                move.MoveDirection.z = 0;
+                if (move.MoveDirection.x != 0)
+                {
+                    move.IsWalking = true;
+                }
+                return;
+            }
+            else if (push.PushDirection.z != 0)
+            {
+                move.MoveDirection.x = 0;
+                if (move.MoveDirection.z != 0)
+                {
+                    move.IsWalking = true;
+                }
+                return;
+            }
+        }
 
-        if(climb.WallDirection.x > climb.WallDirection.z)
+        if (climb.IsHold)
         {
-            move.MoveDirection.x = 0f;
+            if(climb.WallDirection.x != 0)
+            {
+                move.MoveDirection.x = 0f;
+                if (move.MoveDirection.z != 0)
+                {
+                    move.IsWalking = true;
+                }
+                return;
+            }
+            else if(climb.WallDirection.z != 0)
+            {
+                move.MoveDirection.z = 0f;
+                if (move.MoveDirection.x != 0)
+                {
+                    move.IsWalking = true;
+                }
+                return;
+            }
         }
-        else if(climb.WallDirection.z > climb.WallDirection.x)
-        {
-            move.MoveDirection.z = 0f;
-        }
+
+        move.IsWalking = true;
     }
     IEnumerator OnSliding()
     {
@@ -162,4 +186,5 @@ public class PlayerController : Controller
         animator.SetBool("IsCrouch",  move.IsCrouching? true : false);
         animator.SetBool("IsSliding",  move.IsSliding? true : false);
     }
+
 }

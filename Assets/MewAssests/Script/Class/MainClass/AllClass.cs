@@ -2,6 +2,7 @@ using System;
 using JetBrains.Annotations;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.TextCore;
 
 [Serializable]
 public class CameraPosition
@@ -35,6 +36,7 @@ public class Movement
 
     [Header("State Setting")]
     public bool IsWalking;
+    public bool CanMove;
     public bool IsRunning;
     public bool IsJumping;
     public bool IsWalljump;
@@ -50,6 +52,9 @@ public class PushInteract
 {
     public bool IsHold;
     public bool CanHold;
+    public Vector3 PushDirection;
+    public float RayRange;
+    public float RayHeight;
 }
 
 [Serializable]
@@ -60,7 +65,6 @@ public class ClimbInteract
     public Vector3 WallDirection;
     public float RayRange;
     public float RayHeight;
-    public int ClimbLayer;
 }
 
 [Serializable]
@@ -76,3 +80,4 @@ public class ObjectInteract
     public bool IsHold;
     public bool CanHold;
 }
+
