@@ -8,17 +8,17 @@ public class NPC : InteractionObject
 
     [Header("Settings")]
     [SerializeField] private bool canTalk = true;
-    protected PlayerPick playerPick;
+    protected PlayerInteract playerInteract;
 
     public override void GetInteract(GameObject interactor)
     {
 
         player = interactor;
         playerController = interactor.GetComponentInChildren<PlayerController>();
-        playerPick = interactor.GetComponentInChildren<PlayerPick>();
+        playerInteract = interactor.GetComponentInChildren<PlayerInteract>();
         getInteract = playerController.pick.IsHold;
 
-        playerPick.isInteract = getInteract;
+        playerInteract.isInteract = getInteract;
 
         if (canTalk)
         {
