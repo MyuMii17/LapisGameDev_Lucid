@@ -13,6 +13,7 @@ TagManager:
   - Pick
   - CamPosition
   - PushInvWall
+  - Enemy
   layers:
   - Default
   - TransparentFX

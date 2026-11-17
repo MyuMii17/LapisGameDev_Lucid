@@ -9,7 +9,7 @@ public class NavTest : MonoBehaviour
     private NavMeshAgent agent;
     private Vector3 startDestPos;
     private Vector3 currentDestPos;
-    [SerializeField] private Transform destination;
+    public Transform destination;
 
     private void Awake()
     {
