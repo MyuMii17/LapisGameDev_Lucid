@@ -22,6 +22,7 @@ public class Movement
     public float MovePower;
     public float WalkSpeed;
     public float RunMultiplier;
+    public float SlideMultiplier;
     public float TotalJumpPower;
     public float JumpPower;
     public float WallJumpMultiplier;
@@ -42,6 +43,7 @@ public class Movement
     public bool IsWalljump;
     public bool CanJump;
     public bool IsCrouching;
+    public bool OnSlide;
     public bool CanSlide;
     public bool IsSliding;
     public bool IsGrounded;
@@ -62,6 +64,7 @@ public class ClimbInteract
 {
     public bool IsHold;
     public bool CanHold;
+    public bool IsUp;
     public Vector3 WallDirection;
     public float RayRange;
     public float RayHeight;

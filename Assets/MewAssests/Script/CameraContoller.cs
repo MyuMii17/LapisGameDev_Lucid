@@ -25,7 +25,10 @@ public class CameraContoller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(player);
+        Vector3 direction = player.position - transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5 * Time.deltaTime);
 
         if(position == null) return;
         if (!canMove && !OnPosiotion)

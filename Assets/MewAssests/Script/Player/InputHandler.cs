@@ -43,6 +43,9 @@ public class InputHandler : MonoBehaviour
 
     void Update()
     {
+        Vector3 position1 = transform.position;
+        position1.y += playerController.push.RayHeight;
+        Debug.DrawRay(position1 , playerController.move.MoveDirection * playerController.climb.RayRange , Color.red);
         if (moveAction.IsPressed() && playerController.move.CanMove)
         {
             //Debug.DrawRay(crouchRayPosition.position, playerController.move.MoveDirection * wallRayDistance , Color.red);
@@ -72,11 +75,12 @@ public class InputHandler : MonoBehaviour
             playerController.move.IsRunning = false;
         }
 
-        if (jumpAction.triggered && playerController.move.CanJump)
+        if (jumpAction.triggered && playerController.move.IsGrounded)
         {
             if(playerController.move.IsSliding) playerController.move.IsSliding = false;
             
             playerController.move.IsGrounded = false;
+            playerController.move.CanJump = true;
             if (playerController.climb.IsHold)
             {
                 playerController.move.IsWalljump = true;
@@ -108,7 +112,6 @@ public class InputHandler : MonoBehaviour
         else if(interactAction.triggered && playerClimb.currentInteractable != null && playerPush.currentInteractable == null && playerPick.currentInteractable == null)
         {
             playerController.climb.IsHold = !playerController.climb.IsHold;
-            
             playerController.ResetVelocity();
 
             if (playerController.climb.IsHold == true)
@@ -172,10 +175,5 @@ public class InputHandler : MonoBehaviour
         Gizmos.DrawLine(crouchRayPosition.position, crouchRayPosition.position + Vector3.up * rayRange);
 
 
-        // if(playerController != null && playerController.move.MoveDirection != Vector3.zero)
-        // {
-        //     Gizmos.color = isWallHit ? Color.red : Color.green;
-        //     Gizmos.DrawLine(crouchRayPosition.position, crouchRayPosition.position + playerController.move.MoveDirection * wallRayDistance);
-        // }
     }    
 }

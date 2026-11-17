@@ -85,9 +85,10 @@ public class PlayerController : Controller
     }
     void FixedUpdate()
     {
-        if (move.IsWalking && !move.IsSliding)
-        {   
-            move.MovePower = move.WalkSpeed * (push.IsHold || climb.IsHold || (move.IsCrouching && !move.IsSliding)? 0.5f : (move.IsRunning || move.IsSliding? move.RunMultiplier : 1));
+        if(move.IsSliding && !move.OnSlide)
+        {
+            move.OnSlide = true;
+            move.MovePower = move.WalkSpeed * move.SlideMultiplier;
 
             Vector3 velocity = rb.linearVelocity;
             velocity.x = move.MovePower * move.MoveDirection.x;
@@ -95,11 +96,41 @@ public class PlayerController : Controller
             
             rb.linearVelocity = velocity;
         }
+        if (move.IsWalking && !move.IsSliding)
+        {   
+            move.MovePower = move.WalkSpeed * (push.IsHold || climb.IsHold || (move.IsCrouching && !move.IsSliding)? 0.5f : 
+            (move.IsRunning? move.RunMultiplier : 1));
+
+            Vector3 velocity = rb.linearVelocity;
+
+            if (climb.IsHold && climb.IsUp)
+            {
+                velocity.x = 0;
+                velocity.z = 0;
+                if(move.MoveDirection.z != 0)
+                {
+                    velocity.y = move.MovePower * move.MoveDirection.z;
+                }
+
+                rb.linearVelocity = velocity;
+            }
+            else
+            {
+                velocity.x = move.MovePower * move.MoveDirection.x;
+                velocity.z = move.MovePower * move.MoveDirection.z;
+                
+                rb.linearVelocity = velocity;
+            }
+        }
         else if(!move.IsWalking && !move.IsSliding)
         {
+            if (climb.IsUp)
+            {
+                rb.linearVelocity = Vector3.zero;
+            }
+
             rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
         }
-
         if (!move.IsJumping && !move.IsGrounded && move.CanJump && !push.IsHold)
         {
             move.CanJump = false;
@@ -135,8 +166,9 @@ public class PlayerController : Controller
             }
         }
 
-        if (climb.IsHold)
+        if (climb.IsHold && !climb.IsUp)
         {
+
             if(climb.WallDirection.x != 0)
             {
                 move.MoveDirection.x = 0f;
@@ -156,6 +188,14 @@ public class PlayerController : Controller
                 return;
             }
         }
+        else if (climb.IsHold && climb.IsUp)
+        {
+            move.MoveDirection.x = 0f;
+            if (move.MoveDirection.z != 0)
+            {
+                move.IsWalking = true;
+            }
+        }
 
         move.IsWalking = true;
     }
@@ -165,6 +205,7 @@ public class PlayerController : Controller
         
         yield return new WaitForSeconds(slideTime);
         move.IsSliding = false;
+        move.OnSlide = false;
 
         yield return new WaitForSeconds(slideInterval);
         move.CanSlide = true;
@@ -180,7 +221,7 @@ public class PlayerController : Controller
         animator.SetBool("IsMoving", move.IsWalking? true : false);
         animator.SetBool("IsWalking", move.IsWalking && !move.IsJumping && !push.IsHold && !climb.IsHold? true : false);
         animator.SetBool("IsRunning",  move.IsRunning && !move.IsJumping && !push.IsHold && !climb.IsHold? true : false);
-        animator.SetBool("IsJumping",  move.IsJumping && !push.IsHold? true : false);
+        animator.SetBool("IsJumping",  move.IsJumping && !push.IsHold || !move.IsGrounded? true : false);
         animator.SetBool("IsPush",  push.IsHold? true : false);
         animator.SetBool("IsClimbing",  climb.IsHold? true : false);
         animator.SetBool("IsCrouch",  move.IsCrouching? true : false);
