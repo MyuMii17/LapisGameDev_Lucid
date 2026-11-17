@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     //private ICommand moveCommand; Interesting Idea
+    public PullObject pullObject;
     private PlayerController playerController;
     private PlayerPush playerPush;
     private PlayerClimb playerClimb;
@@ -26,7 +27,7 @@ public class InputHandler : MonoBehaviour
         playerPush = GetComponentInChildren<PlayerPush>();
         playerClimb = GetComponentInChildren<PlayerClimb>();
         playerPick = GetComponentInChildren<PlayerPick>();
-        //playerInteract = GetComponentInChildren<PlayerInteract>();
+        playerInteract = GetComponentInChildren<PlayerInteract>();
         objectLayer = LayerMask.GetMask("Object");
     }
 
@@ -46,25 +47,14 @@ public class InputHandler : MonoBehaviour
         Vector3 position1 = transform.position;
         position1.y += playerController.push.RayHeight;
         Debug.DrawRay(position1 , playerController.move.MoveDirection * playerController.climb.RayRange , Color.red);
-        if (moveAction.IsPressed() && playerController.move.CanMove)
+
+        if (playerController.push.IsPull)
         {
-            //Debug.DrawRay(crouchRayPosition.position, playerController.move.MoveDirection * wallRayDistance , Color.red);
-            // if (Physics.Raycast(crouchRayPosition.position, playerController.move.MoveDirection, out RaycastHit hit, wallRayDistance, objectLayer))
-            // {
-            //     isWallHit = true;
-            //     playerController.move.MoveDirection = Vector3.ProjectOnPlane(playerController.move.MoveDirection, hit.normal);
+            WalkTimeWhilePull();
+        }
 
-            //     if (Vector3.Dot(playerController.move.MoveDirection, hit.normal) < 0)
-            //     {
-            //         playerController.move.MoveDirection = Vector3.zero;
-            //     }
-            //     return;
-            // }
-            // else
-            // {
-            //     isWallHit = false;
-            // }
-
+        if (moveAction.IsPressed())
+        {
             playerController.Move();
             playerController.move.IsRunning = runAction.IsPressed() && playerController.move.IsWalking;
             // moveCommand.Excute() Interesting Idea
@@ -87,7 +77,7 @@ public class InputHandler : MonoBehaviour
             }
         }
 
-        if (interactAction.triggered && playerPush.currentInteractable != null && playerClimb.currentInteractable == null && playerPick.currentInteractable == null && !playerController.move.IsJumping)
+        if (interactAction.triggered && playerPush.currentInteractable != null && playerClimb.currentInteractable == null && playerPick.currentInteractable == null && !playerController.move.IsJumping && !playerPush.target.pull.IsEndPull)
         {
             playerController.push.IsHold = !playerController.push.IsHold;
             if (playerController.push.IsHold == true)
@@ -146,6 +136,11 @@ public class InputHandler : MonoBehaviour
             playerPick.OnInteract();
         }
 
+        if(interactAction.triggered && playerInteract.currentInteractable != null)
+        {
+            playerInteract.OnInteract();
+        }
+
         if (playerController.move.IsCrouching)
         {
             isCrouchHit = Physics.Raycast(crouchRayPosition.position, Vector3.up, rayRange, objectLayer);
@@ -166,6 +161,18 @@ public class InputHandler : MonoBehaviour
     {
         if(playerController.push.IsHold || playerController.climb.IsHold) return false;
         return true;
+    }
+
+    public void WalkTimeWhilePull()
+    {
+        if(playerController.move.MoveDirection != playerController.push.PushDirection && playerController.move.IsWalking)
+        {
+            playerController.push.PullTime += Time.deltaTime;
+        }
+        else if(!playerController.move.IsWalking || playerController.move.MoveDirection == playerController.push.PushDirection || playerController.push.PullTime < playerController.push.PullInterval)
+        {
+            playerController.push.PullTime = 0f;
+        }
     }
 
     private void OnDrawGizmos()

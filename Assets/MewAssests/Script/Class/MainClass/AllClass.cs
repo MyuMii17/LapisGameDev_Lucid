@@ -57,6 +57,17 @@ public class PushInteract
     public Vector3 PushDirection;
     public float RayRange;
     public float RayHeight;
+
+    public bool IsPull;
+    public float PullTime;
+    public float PullInterval;
+}
+[Serializable]
+public class PullObject
+{
+    public bool CanPullOnly;
+    public bool IsEndPull;
+    public float PullInterval;
 }
 
 [Serializable]
@@ -84,3 +95,33 @@ public class ObjectInteract
     public bool CanHold;
 }
 
+[System.Serializable]
+public class ItemSlots
+{
+    // [SerializeReference]
+    // public ItemData item;
+    public GameObject self;
+    public Sprite sprite;
+    public int count;
+    public int maxStack;
+}
+
+[System.Serializable]
+public class ItemCondition
+{
+    public bool CanIteract;
+    public bool HasCondition;
+    public bool CanDetect;
+    public bool IsAdd;
+    // public ItemData Item;
+    public int Count;
+    public int MaxStack;
+    public float CircleRadius;
+}
+
+[System.Serializable]
+public class CutsceneSetting
+{
+    public bool HasCutscene;
+    public int CutsceneNumber;
+}

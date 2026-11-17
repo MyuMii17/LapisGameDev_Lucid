@@ -31,6 +31,7 @@ public class ClimbObject : InteractionObject
         }
         else if(playerClimb.isInteract == false || playerController.move.IsJumping)
         {
+            playerController.move.MoveDirection = playerController.climb.WallDirection;
             playerClimb.isInteract = false;
             playerController.climb.IsHold = false;
             playerController.climb.IsUp = false;

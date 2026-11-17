@@ -218,7 +218,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PushObject
   getInteract: 0
-  startTranform: {x: 0, y: 0, z: 0}
+  pull:
+    CanPullOnly: 0
+    IsEndPull: 0
+    PullInterval: 0
+    AnimationName: 
   maxMass: 0
   minMass: 1
   isReset: 0
@@ -1174,6 +1178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPushAndPull
   targetTag: Box
   isInteract: 0
+  target: {fileID: 0}
 --- !u!135 &458123528
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1949,6 +1954,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74104fdb36054c34f8970699613c2923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputHandler
+  pullObject:
+    CanPullOnly: 0
+    IsEndPull: 0
+    PullInterval: 0
+    AnimationName: 
   crouchRayPosition: {fileID: 0}
   rayRange: 0
   objectLayer: 0
@@ -1965,7 +1975,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f3954dae74169640a3f0d4c9fe2a745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  walkClip: {fileID: 0}
   move:
     MoveDirection: {x: 0, y: 0, z: 0}
     MovePower: 0
@@ -1996,6 +2005,9 @@ MonoBehaviour:
     PushDirection: {x: 0, y: 0, z: 0}
     RayRange: 0
     RayHeight: 0
+    IsPull: 0
+    PullTime: 0
+    PullInterval: 0
   climb:
     IsHold: 0
     CanHold: 0
@@ -2454,7 +2466,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PushObject
   getInteract: 0
-  startTranform: {x: 0, y: 0, z: 0}
+  pull:
+    CanPullOnly: 1
+    IsEndPull: 0
+    PullInterval: 5
+    AnimationName: 
   maxMass: 0
   minMass: 1
   isReset: 0
@@ -2528,7 +2544,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PushObject
   getInteract: 0
-  startTranform: {x: 0, y: 0, z: 0}
+  pull:
+    CanPullOnly: 0
+    IsEndPull: 0
+    PullInterval: 0
+    AnimationName: 
   maxMass: 0
   minMass: 1
   isReset: 0

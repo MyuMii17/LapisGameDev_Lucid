@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using NUnit.Framework;
 using Unity.Mathematics;
@@ -12,7 +13,6 @@ public class PlayerController : Controller
     private InputAction moveAction;
     private Vector3 currentRotation;
     private CapsuleCollider collider;
-    [SerializeField]private AnimationClip walkClip;
     private Animator animator;
     private RaycastHit hit;
     public Movement move;
@@ -23,8 +23,17 @@ public class PlayerController : Controller
     private Coroutine slideCoroutine;
     public float slideInterval;
     public float slideTime;
+    private static PlayerController Instance = null;
+    public static PlayerController GetInstance()
+    {
+        return Instance;
+    }
+
     void Awake()
     {
+        if(Instance == null) Instance = this;
+        else Destroy(gameObject);
+
         animator = GetComponent<Animator>();
         collider = GetComponent<CapsuleCollider>();
         move.CanMove = true;
@@ -85,7 +94,7 @@ public class PlayerController : Controller
     }
     void FixedUpdate()
     {
-        if(move.IsSliding && !move.OnSlide)
+        if(move.IsSliding && !move.OnSlide && move.CanMove)
         {
             move.OnSlide = true;
             move.MovePower = move.WalkSpeed * move.SlideMultiplier;
@@ -96,7 +105,7 @@ public class PlayerController : Controller
             
             rb.linearVelocity = velocity;
         }
-        if (move.IsWalking && !move.IsSliding)
+        if (move.IsWalking && !move.IsSliding && move.CanMove)
         {   
             move.MovePower = move.WalkSpeed * (push.IsHold || climb.IsHold || (move.IsCrouching && !move.IsSliding)? 0.5f : 
             (move.IsRunning? move.RunMultiplier : 1));
@@ -122,7 +131,7 @@ public class PlayerController : Controller
                 rb.linearVelocity = velocity;
             }
         }
-        else if(!move.IsWalking && !move.IsSliding)
+        else if(!move.IsWalking && !move.IsSliding || !move.CanMove)
         {
             if (climb.IsUp)
             {
@@ -149,20 +158,42 @@ public class PlayerController : Controller
             if(push.PushDirection.x != 0)
             {
                 move.MoveDirection.z = 0;
-                if (move.MoveDirection.x != 0)
+                if (push.IsPull)
                 {
-                    move.IsWalking = true;
+                    if (move.MoveDirection.x != push.PushDirection.x && move.MoveDirection.x != 0)
+                    {
+                        move.IsWalking = true;
+                    }
+                    return;
                 }
-                return;
+                else
+                {
+                    if (move.MoveDirection.x != 0)
+                    {
+                        move.IsWalking = true;
+                    }
+                    return;
+                }
             }
             else if (push.PushDirection.z != 0)
             {
                 move.MoveDirection.x = 0;
-                if (move.MoveDirection.z != 0)
+                if (push.IsPull)
                 {
-                    move.IsWalking = true;
+                    if (move.MoveDirection.z != push.PushDirection.z && move.MoveDirection.z != 0)
+                    {
+                        move.IsWalking = true;
+                    }
+                    return;
                 }
-                return;
+                else
+                {
+                    if (move.MoveDirection.z != 0)
+                    {
+                        move.IsWalking = true;
+                    }
+                    return;
+                }
             }
         }
 
@@ -195,9 +226,14 @@ public class PlayerController : Controller
             {
                 move.IsWalking = true;
             }
+            return;
         }
-
-        move.IsWalking = true;
+        
+        if(push.IsHold || climb.CanHold) return;
+        if(move.CanMove && move.MoveDirection != Vector3.zero)
+        {
+            move.IsWalking = true;
+        }
     }
     IEnumerator OnSliding()
     {

@@ -52,8 +52,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.01, z: 1}
-  m_Center: {x: 0, y: -0.05, z: 0}
+  m_Size: {x: 0.4, y: 0.01, z: 0.4}
+  m_Center: {x: 0, y: -0.15, z: 0}
 --- !u!114 &1093839581053390024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,6 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPushAndPull
   targetTag: Push
   isInteract: 0
+  target: {fileID: 0}
 --- !u!1 &7345825919163509426
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,27 +436,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eaeec33bf6858ef439eab027ce6d902c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.35
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eaeec33bf6858ef439eab027ce6d902c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.35
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eaeec33bf6858ef439eab027ce6d902c, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.35
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eaeec33bf6858ef439eab027ce6d902c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.620255
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eaeec33bf6858ef439eab027ce6d902c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.659
+      value: 11.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eaeec33bf6858ef439eab027ce6d902c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.8426443
+      value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eaeec33bf6858ef439eab027ce6d902c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -484,6 +485,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: eaeec33bf6858ef439eab027ce6d902c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eaeec33bf6858ef439eab027ce6d902c, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8200647722859066460, guid: eaeec33bf6858ef439eab027ce6d902c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1009,14 +1014,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f3954dae74169640a3f0d4c9fe2a745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  walkClip: {fileID: -3787710240606080537, guid: eaeec33bf6858ef439eab027ce6d902c, type: 3}
   move:
     MoveDirection: {x: 0, y: 0, z: 0}
     MovePower: 0
-    WalkSpeed: 2
+    WalkSpeed: 5
     RunMultiplier: 2
+    SlideMultiplier: 3
     TotalJumpPower: 0
-    JumpPower: 5
+    JumpPower: 8
     WallJumpMultiplier: 1.25
     RotationSpeed: 5
     RotationSmoothSpeed: 2
@@ -1027,8 +1032,9 @@ MonoBehaviour:
     IsRunning: 0
     IsJumping: 0
     IsWalljump: 0
-    CanJump: 1
+    CanJump: 0
     IsCrouching: 0
+    OnSlide: 0
     CanSlide: 1
     IsSliding: 0
     IsGrounded: 1
@@ -1038,6 +1044,9 @@ MonoBehaviour:
     PushDirection: {x: 0, y: 0, z: 0}
     RayRange: 2
     RayHeight: 0.75
+    IsPull: 0
+    PullTime: 0
+    PullInterval: 0
   climb:
     IsHold: 0
     CanHold: 0
@@ -1065,6 +1074,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74104fdb36054c34f8970699613c2923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputHandler
+  pullObject:
+    CanPullOnly: 0
+    IsEndPull: 0
+    PullInterval: 0
   crouchRayPosition: {fileID: 8671760459237707888}
   rayRange: 0.75
   objectLayer: 0
@@ -1078,7 +1091,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1339277990319848040}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: d13fb6dcfec26714cba432053e4d798c, type: 3}
   m_Controller: {fileID: 9100000, guid: 895c4e1f6aebea14e8b5838626c9c6a5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0

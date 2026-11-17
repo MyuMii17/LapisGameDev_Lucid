@@ -3,22 +3,37 @@ using UnityEngine;
 
 public class InteractObject : InteractionObject
 {
-    private PlayerInteract playerInteract;
+    protected PlayerInteract playerInteract;
+    protected Animator animator;
+    protected Coroutine interactCorutine;
+    public string animationName;
+    public string animationTrigger;
+    public bool isOneTimeAnimaion;
     void Awake()
     {
-        
+        animator = GetComponentInParent<Animator>();
     }
-    public virtual IEnumerator OnInteract()
+    protected virtual IEnumerator OnInteract()
     {
         yield return null;
     }
+    protected void EndInteract()
+    {
+        playerInteract.isInteract = false;
+
+        playerInteract = null;
+        playerController = null;
+    } 
     public override void GetInteract(GameObject interactor)
     {
+        if(interactCorutine != null) return;
         player = interactor;
         playerController = interactor.GetComponentInChildren<PlayerController>();
         playerInteract = interactor.GetComponentInChildren<PlayerInteract>();
 
         getInteract = playerController.interact.IsHold;
         playerInteract.isInteract = getInteract;
+
+        interactCorutine = StartCoroutine(OnInteract());
     }
 }

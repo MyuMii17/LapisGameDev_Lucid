@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class PlayerPush : PlayerInteraction
 {
+    public PushObject target;
     protected override void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(targetTag) && currentInteractable == null)
         {
             IInteractable interactable = other.GetComponentInParent<IInteractable>();
-
+            target = other.GetComponentInParent<PushObject>();
             if (interactable == null) return;
 
             currentInteractable = interactable;
@@ -18,6 +19,7 @@ public class PlayerPush : PlayerInteraction
         if (other.CompareTag(targetTag) && currentInteractable != null)
         {
             IInteractable interactable = other.GetComponentInParent<IInteractable>();
+            target = other.GetComponentInParent<PushObject>();
 
             if (interactable == null) return;
 
@@ -29,6 +31,7 @@ public class PlayerPush : PlayerInteraction
         if (other.CompareTag(targetTag) && currentInteractable != null)
         {
             currentInteractable = null;
+            target = null;
         } 
     }
 
