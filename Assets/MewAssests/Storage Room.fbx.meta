@@ -3,7 +3,92 @@ guid: 3ab9f00faec477340b43c2be08a21b3e
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Diamond_M
+    second: {fileID: 2100000, guid: 2f3c82091c1e2cb459e59d4464fcdf20, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Diamond_M.001
+    second: {fileID: 2100000, guid: ace7688aa5279624bb0fbb6f0d4d6b53, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DoorKnob_M
+    second: {fileID: 2100000, guid: a9e896a1585fa0345be79e9e681e113e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Door_M
+    second: {fileID: 2100000, guid: 4c7f31ac1bd4ee14e9ce1875d9a337cf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Drawer_M
+    second: {fileID: 2100000, guid: dded177678af68c4f9971482f1bf4829, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Drawer_M.001
+    second: {fileID: 2100000, guid: 03eb41aa443db59498d407d1305bddc3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LeafKnob_M
+    second: {fileID: 2100000, guid: e38244d334c10b944ad5deb52d6d445d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf_M
+    second: {fileID: 2100000, guid: f941a5cc256ceac4c985ba275a9d354f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light_M
+    second: {fileID: 2100000, guid: f1e3ee4c8d4f7374b8002cda2355e5a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pin_M
+    second: {fileID: 2100000, guid: 74c829ec0bba45c46b26307ea645cda4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pin_M.001
+    second: {fileID: 2100000, guid: 30e8403cda5f7624cab406837cf9f704, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rope_M
+    second: {fileID: 2100000, guid: 7ec7c6db7f7391a4bb50410cd58c5608, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rope_M.001
+    second: {fileID: 2100000, guid: ba23af99ded09004faa5b2698cf774eb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shelf_M
+    second: {fileID: 2100000, guid: 577016677a1001c4fb909d8a20bf9788, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SideTable_M
+    second: {fileID: 2100000, guid: fa5bc333cd83c8c44b0eda4de71c05e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall_M
+    second: {fileID: 2100000, guid: a1bc728360fea4b49a09e60041ee3f9b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WoodFloor1_M
+    second: {fileID: 2100000, guid: acace82f017ab6a4982fbb06f5e980bf, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

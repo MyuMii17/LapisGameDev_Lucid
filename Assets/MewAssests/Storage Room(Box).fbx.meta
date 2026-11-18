@@ -3,7 +3,17 @@ guid: f56c3dd3bdae39445b904640c71ddedd
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Box_M
+    second: {fileID: 2100000, guid: 119a9da02467c9d498d2ff2182a24a4b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Trashbag_M
+    second: {fileID: 2100000, guid: 9edf30a1bd739d44f979a39288bbdbaa, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

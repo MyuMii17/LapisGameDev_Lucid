@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerClimb : PlayerInteraction
 {
+    public ClimbObject climbTarget;
     protected override void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(targetTag) && currentInteractable == null)
@@ -10,6 +11,7 @@ public class PlayerClimb : PlayerInteraction
 
             if (interactable == null) return;
 
+            climbTarget = other.GetComponentInParent<ClimbObject>();
             currentInteractable = interactable;
         }
     }
@@ -21,6 +23,7 @@ public class PlayerClimb : PlayerInteraction
 
             if (interactable == null) return;
 
+           climbTarget = other.GetComponentInParent<ClimbObject>();
             currentInteractable = interactable;
         } 
     }
@@ -34,7 +37,7 @@ public class PlayerClimb : PlayerInteraction
                 playerController.ResetVelocity();
                 OnInteract();
             }
-
+            climbTarget = null;
             currentInteractable = null;
         } 
     }

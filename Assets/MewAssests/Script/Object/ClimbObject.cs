@@ -26,7 +26,16 @@ public class ClimbObject : InteractionObject
             else if(isUp && !isReadyUp)
             {
                 isReadyUp = true;
-                player.transform.position = new Vector3(player.transform.position.x, transform.position.y - rangeY, player.transform.position.z);
+                if(transform.position.y - rangeY < player.transform.position.y)
+                {
+                    player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+                    return;
+                }
+                else
+                {
+                    player.transform.position = new Vector3(player.transform.position.x, transform.position.y - rangeY, player.transform.position.z);
+                    return;
+                }
             }
         }
         else if(playerClimb.isInteract == false || playerController.move.IsJumping)
@@ -50,10 +59,10 @@ public class ClimbObject : InteractionObject
         playerController = interactor.GetComponentInChildren<PlayerController>();
         playerClimb = interactor.GetComponentInChildren<PlayerClimb>();
         playerRb = interactor.GetComponent<Rigidbody>();
-        playerRb.useGravity = false;
 
         getInteract = playerController.climb.IsHold;
         playerClimb.isInteract = getInteract;
+        playerRb.useGravity = !getInteract;
         playerController.climb.IsUp = isUp;
     }
 }

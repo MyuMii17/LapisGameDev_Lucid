@@ -99,7 +99,7 @@ public class InputHandler : MonoBehaviour
             }
             playerPush.OnInteract();
         }
-        else if(interactAction.triggered && playerClimb.currentInteractable != null && playerPush.currentInteractable == null && playerPick.currentInteractable == null)
+        else if(interactAction.triggered && playerClimb.currentInteractable != null && playerClimb.climbTarget.canClimb && playerPush.currentInteractable == null && playerPick.currentInteractable == null)
         {
             playerController.climb.IsHold = !playerController.climb.IsHold;
             playerController.ResetVelocity();
