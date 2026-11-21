@@ -215,7 +215,7 @@ ModelImporter:
       takeName: rig.001|Hold-MoveLeft
       internalID: 6826068390173819905
       firstFrame: 0
-      lastFrame: 87
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -244,7 +244,7 @@ ModelImporter:
       takeName: rig.001|Hold-MoveRight
       internalID: -5074231049604892466
       firstFrame: 0
-      lastFrame: 87
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
