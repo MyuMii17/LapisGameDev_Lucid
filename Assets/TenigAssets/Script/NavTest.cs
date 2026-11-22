@@ -18,7 +18,7 @@ public class NavTest : MonoBehaviour
     }
     private void Start()
     {
-        StartCoroutine(Patrol());
+        //StartCoroutine(Patrol());
     }
     // Update is called once per frame
     void Update()
@@ -28,17 +28,17 @@ public class NavTest : MonoBehaviour
         currentDestPos = destination.position;
     }
 
-    IEnumerator Patrol()
-    {
-        destination.transform.Translate(Vector3.forward);
-        yield return new WaitForSeconds(3f);
-        destination.transform.Translate(Vector3.right);
-        yield return new WaitForSeconds(3f);
-        destination.transform.Translate(Vector3.back);
-        yield return new WaitForSeconds(3f);
-        destination.position = startDestPos;
+    //IEnumerator Patrol()
+    //{
+    //    destination.transform.Translate(Vector3.forward);
+    //    yield return new WaitForSeconds(3f);
+    //    destination.transform.Translate(Vector3.right);
+    //    yield return new WaitForSeconds(3f);
+    //    destination.transform.Translate(Vector3.back);
+    //    yield return new WaitForSeconds(3f);
+    //    destination.position = startDestPos;
 
-    }
+    //}
 
 
 }
