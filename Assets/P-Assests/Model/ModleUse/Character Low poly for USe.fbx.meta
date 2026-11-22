@@ -70,7 +70,7 @@ ModelImporter:
       takeName: rig.001|Crouch-Idle1.0
       internalID: -6390213454254817272
       firstFrame: 0
-      lastFrame: 179
+      lastFrame: 59
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -418,7 +418,7 @@ ModelImporter:
       takeName: rig.001|Push-walk
       internalID: -8723951019063618496
       firstFrame: 0
-      lastFrame: 87
+      lastFrame: 59
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -512,7 +512,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -541,7 +541,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
