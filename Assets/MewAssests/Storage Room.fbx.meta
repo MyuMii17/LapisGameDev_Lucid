@@ -1,9 +1,104 @@
 fileFormatVersion: 2
-guid: 3ab9f00faec477340b43c2be08a21b3e
+guid: c106b9530faae3341aea7ea7a5060f6f
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bean_M
+    second: {fileID: 2100000, guid: f1994196dc7c90f479f3f9e2c8cda0b0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body_M
+    second: {fileID: 2100000, guid: 04f59d0ef7185e24e96d76affa03da7e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Book10_M
+    second: {fileID: 2100000, guid: 799325aa67e362348b13aee4161d6233, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Book11_M
+    second: {fileID: 2100000, guid: 149608ce85f01a643b616e7a13c0f726, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Book12_M
+    second: {fileID: 2100000, guid: 9d16a4ee25a6872438a4280a4de87d4a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Book13_M
+    second: {fileID: 2100000, guid: 5a024a88ecd1694469bd8de13a79aece, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Book1_M
+    second: {fileID: 2100000, guid: 449d6358c9a40414ebff643506da7d9e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Book2_M
+    second: {fileID: 2100000, guid: 3924256d50ac9504ab2c080597af70f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Book3_M
+    second: {fileID: 2100000, guid: 632c598e4e54ebd42951227efe350694, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Book4_M
+    second: {fileID: 2100000, guid: 17d610d47a42b4c48b441d29d03c26e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Book5_M
+    second: {fileID: 2100000, guid: f70e5f994f56401429d8890c3f48641a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Book6_M
+    second: {fileID: 2100000, guid: 864ceefd43eb25144ba0aa630f8c5c31, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Book8_M
+    second: {fileID: 2100000, guid: f3b0dd1f87f5cd54fbaf5f665cd3f2f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Book9_M
+    second: {fileID: 2100000, guid: 9022d53e76d388b4098c80cc730c7cf3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Box_M
+    second: {fileID: 2100000, guid: 119a9da02467c9d498d2ff2182a24a4b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ButtonBlue_M
+    second: {fileID: 2100000, guid: 9ad96ffcc3941984886ccd13d067e520, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ButtonGreen_M
+    second: {fileID: 2100000, guid: f3883a7e1a3603948bf90b01b09fff8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ButtonRed_M
+    second: {fileID: 2100000, guid: 04f3cc6d24cbfad4bb9553cb2d69fece, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ButtonYellow_M
+    second: {fileID: 2100000, guid: 04d26f251250ff946bfd2ae20ff17a6f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -12,13 +107,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Diamond_M.001
-    second: {fileID: 2100000, guid: ace7688aa5279624bb0fbb6f0d4d6b53, type: 2}
+      name: DoorKnob_M
+    second: {fileID: 2100000, guid: a9e896a1585fa0345be79e9e681e113e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: DoorKnob_M
-    second: {fileID: 2100000, guid: a9e896a1585fa0345be79e9e681e113e, type: 2}
+      name: DoorKnob_M.001
+    second: {fileID: 2100000, guid: 91385eea57b0ace4fb0e8a11db099644, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -27,13 +122,53 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Door_M.001
+    second: {fileID: 2100000, guid: 7b125480f1f8ef34d967768d79abf8ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Drawer02_M
+    second: {fileID: 2100000, guid: 2a2eb8c43dad8bf4f8c4bd4045779b15, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Drawer_M
     second: {fileID: 2100000, guid: dded177678af68c4f9971482f1bf4829, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Drawer_M.001
-    second: {fileID: 2100000, guid: 03eb41aa443db59498d407d1305bddc3, type: 2}
+      name: EndRoom_M
+    second: {fileID: 2100000, guid: d10e99f3f2e68f843ac6f8b3e0a8cae3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eye_M
+    second: {fileID: 2100000, guid: f145e7f46264acc469971677638fd250, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GearBox_M
+    second: {fileID: 2100000, guid: 83ff022e380ad904c9ec2b45c4b491ce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: 0ad04f5df73b51e44b1f8e4dd47b7e1c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass.001
+    second: {fileID: 2100000, guid: 1a4795516ea592a42b859799b58b0695, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass.002
+    second: {fileID: 2100000, guid: 7345c12b081b58f4f94ae87c17fd7a45, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass.003
+    second: {fileID: 2100000, guid: 437bcf294f78bae459d56a931b37f7bd, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -52,13 +187,53 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Pin_M
-    second: {fileID: 2100000, guid: 74c829ec0bba45c46b26307ea645cda4, type: 2}
+      name: MiniDrawer_M
+    second: {fileID: 2100000, guid: 29c3d68012d60c14799c4a5b7f665695, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Pin_M.001
-    second: {fileID: 2100000, guid: 30e8403cda5f7624cab406837cf9f704, type: 2}
+      name: PaintBush_M
+    second: {fileID: 2100000, guid: 5c855f842306a5f4fba93f15184a29c9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PaintCan1_M
+    second: {fileID: 2100000, guid: d45fc89dbf9fc3a49a400a51539ae718, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PaintCan2_M
+    second: {fileID: 2100000, guid: dbb65749052a2934a98f0eb5e9f6bc68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PaintCan3_M
+    second: {fileID: 2100000, guid: bc27ba59c85a5bb49940f37a0fd6937a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pilow1
+    second: {fileID: 2100000, guid: 85b12399ab0e37d43a70428f35910114, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pilow2
+    second: {fileID: 2100000, guid: c0e18b59429363b47a31efda719d767c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pilow3
+    second: {fileID: 2100000, guid: 1debfba46dad5b647976d62a6ad0fc76, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pilow4
+    second: {fileID: 2100000, guid: a65c7adc5e9e53d4fadf4f9822bc9957, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pin_M
+    second: {fileID: 2100000, guid: 74c829ec0bba45c46b26307ea645cda4, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -67,8 +242,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Rope_M.001
-    second: {fileID: 2100000, guid: ba23af99ded09004faa5b2698cf774eb, type: 2}
+      name: Ruby_M
+    second: {fileID: 2100000, guid: 0653f1f8c1af6cf4992b71eb01294ecf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Safe_M
+    second: {fileID: 2100000, guid: 345a5fd471949634593adb6618e8b5d3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -89,6 +269,96 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: WoodFloor1_M
     second: {fileID: 2100000, guid: acace82f017ab6a4982fbb06f5e980bf, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 1
+    second: {fileID: 2800000, guid: 5001ded96d4479d4b9b05ce0b0e07a6a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 2
+    second: {fileID: 2800000, guid: 02e60e09460f2094a8e922924135a205, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 3
+    second: {fileID: 2800000, guid: 803e1fe287d8a0d43a9f7c9719d4253a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BookColor1
+    second: {fileID: 2800000, guid: 40a47db3f2697b543a8b26da23824f54, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BookColor10
+    second: {fileID: 2800000, guid: 2a1cc104ecd9664459c6e05b0b4f6fdd, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BookColor11
+    second: {fileID: 2800000, guid: f96d8bc0e2874964ea8e67f9b0c6685c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BookColor12
+    second: {fileID: 2800000, guid: d2dc3e3591a580c439314b0ba5beb6f3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BookColor13
+    second: {fileID: 2800000, guid: d3b084a93146085499dc9133642e46c2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BookColor2
+    second: {fileID: 2800000, guid: 883d683d314e90142a90bae00ce79c05, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BookColor3
+    second: {fileID: 2800000, guid: cabe9ed30425d9f4db19859038b9edd5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BookColor4
+    second: {fileID: 2800000, guid: 6d746a3955cf0d34ca821234fac6f4f0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BookColor5
+    second: {fileID: 2800000, guid: b9f16b119113b72438eca62751377f7c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BookColor6
+    second: {fileID: 2800000, guid: e85c5513dc66371408607b433fec8a60, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BookColor7
+    second: {fileID: 2800000, guid: 930eb0006fc0bbb40baa33c14f86dcfe, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BookColor9
+    second: {fileID: 2800000, guid: 3bc181393f77a6e41b99a27eb5301b88, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PaintBush
+    second: {fileID: 2800000, guid: f1f83d15bd480854e9f2d6e4a631d4c8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Sprite-0001
+    second: {fileID: 2800000, guid: 7d1f0185dfea14741988a2168111178f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Sprite-0002
+    second: {fileID: 2800000, guid: be2fa135840e4424ebcd79b568ce9d6d, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -124,8 +394,8 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
-    preBakeConvexCollisionMesh: 1
-    preBakeTriangleCollisionMesh: 1
+    preBakeConvexCollisionMesh: 0
+    preBakeTriangleCollisionMesh: 0
     importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1

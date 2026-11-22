@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Box_M
-    second: {fileID: 2100000, guid: 119a9da02467c9d498d2ff2182a24a4b, type: 2}
+    second: {fileID: 2100000, guid: 24758df7e24cd8d4999f7f8e5ba73651, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Trashbag_M
-    second: {fileID: 2100000, guid: 9edf30a1bd739d44f979a39288bbdbaa, type: 2}
+    second: {fileID: 2100000, guid: 3ed1f02b2d5e3fe4cad4ad1528570c2a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
