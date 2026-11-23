@@ -108,6 +108,8 @@ public class InputHandler : MonoBehaviour
                     playerController.push.PushDirection = pushDirection;
 
                     transform.rotation = Quaternion.LookRotation(pushDirection);
+
+                    
                 }
             }
             playerPush.OnInteract();

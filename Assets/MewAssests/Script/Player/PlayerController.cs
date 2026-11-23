@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using NUnit.Framework;
 using Unity.Mathematics;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -61,7 +60,7 @@ public class PlayerController : Controller
 
         if (push.IsHold)
         {
-            collider.radius = 1;
+            collider.radius = 1f;
         }
         else if (move.IsCrouching)
         {
