@@ -8,6 +8,7 @@ public class ClimbObject : InteractionObject
     private PlayerClimb playerClimb;
     private Rigidbody playerRb;
     public bool isSetPosition;
+    public bool canSetPos;
     public float rangeX;
     public float rangeY;
     public float rangeZ;
@@ -45,12 +46,11 @@ public class ClimbObject : InteractionObject
             }
             if (!isUp)
             {
-                if (!isSetPosition)
+                if (!isSetPosition && canSetPos)
                 {
                     isSetPosition = true;
                     player.transform.position = new Vector3(transform.position.x - rangeX, transform.position.y - rangeY, transform.position.z - rangeZ);
                 }
-
                 player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
             }
             else if(isUp && !isReadyUp)
