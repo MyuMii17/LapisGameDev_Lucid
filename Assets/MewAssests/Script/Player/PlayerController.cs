@@ -60,7 +60,7 @@ public class PlayerController : Controller
 
         if (push.IsHold)
         {
-            collider.radius = 1f;
+            collider.radius = 0.5f;
         }
         else if (move.IsCrouching)
         {
@@ -73,13 +73,13 @@ public class PlayerController : Controller
             else
             {
                 collider.height = 3;
-                collider.radius = 1;
+                collider.radius = 0.5f;
                 collider.center = new Vector3(collider.center.x, 1.5f, collider.center.z);
             }
         }
         else
         {
-            collider.radius = 0.5f;
+            collider.radius = 0.3f;
             collider.height = 4.05f;
             collider.center = new Vector3(collider.center.x, 2, collider.center.z);
         }
