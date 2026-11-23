@@ -56,7 +56,7 @@ public class ClimbObject : InteractionObject
                 }
                 else
                 {
-                    player.transform.position = new Vector3(player.transform.position.x, transform.position.y - rangeY, player.transform.position.z);
+                    player.transform.position = new Vector3(transform.position.x - rangeX, transform.position.y - rangeY, transform.position.z - rangeZ);
                     return;
                 }
             }
