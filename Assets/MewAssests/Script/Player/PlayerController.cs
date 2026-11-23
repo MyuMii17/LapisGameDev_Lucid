@@ -60,7 +60,7 @@ public class PlayerController : Controller
 
         if (push.IsHold)
         {
-            collider.radius = 0.5f;
+            collider.radius = 0.7f;
         }
         else if (move.IsCrouching)
         {
