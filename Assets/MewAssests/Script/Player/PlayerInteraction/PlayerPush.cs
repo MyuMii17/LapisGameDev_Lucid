@@ -30,6 +30,11 @@ public class PlayerPush : PlayerInteraction
     {
         if (other.CompareTag(targetTag) && currentInteractable != null)
         {
+            if(playerController.push.IsHold)
+            {
+                playerController.push.IsHold = false;
+                OnInteract();
+            }
             currentInteractable = null;
             target = null;
         } 

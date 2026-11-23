@@ -14,13 +14,14 @@ public class PushObject : InteractionObject
     public bool isGrounded;
     public bool canPush;
     public bool hasClimb;
+    public bool isInvert;
+    public bool isAtLimit;
     private ClimbObject climbObject;
     void Awake()
     {
         rb = GetComponentInParent<Rigidbody>();
         maxMass = rb.mass;
         startTranform = transform.position;
-        canPush = true;
     }
     protected override void Start()
     {
@@ -75,7 +76,16 @@ public class PushObject : InteractionObject
 
         if(playerPush.isInteract == true && isGrounded)
         {
-            rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+            if (isAtLimit)
+            {
+                playerController.push.IsAtLimit = true;
+                if((!isInvert && playerController.move.MoveDirection != playerController.push.PushDirection) || (isInvert && playerController.move.MoveDirection == playerController.push.PushDirection))
+                {
+                    rb.linearVelocity = Vector3.zero;
+                    return;
+                }
+            }
+            // rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
             Vector3 direction = playerController.move.MoveDirection;
             direction.y = 0;
             rb.linearVelocity = playerController.move.IsWalking? (direction * (playerController.move.MovePower + 0.25f)) : Vector3.zero;
@@ -98,11 +108,13 @@ public class PushObject : InteractionObject
                 climbObject.canClimb = false;
             }
 
-            rb.constraints = RigidbodyConstraints.FreezeRotation;
+            // rb.constraints = RigidbodyConstraints.FreezeRotation;
             playerController.move.MoveDirection = playerController.push.PushDirection;
             playerPush.isInteract = false;
             playerController.push.IsHold = false;
             playerController.move.CanMove = true;
+            playerController.push.IsAtLimit = false;
+            playerController.push.IsInvert = false;
 
             rb.linearVelocity = Vector3.zero;
             rb.mass = maxMass;
@@ -122,10 +134,17 @@ public class PushObject : InteractionObject
         getInteract = playerController.push.IsHold;
 
         playerPush.isInteract = getInteract;
+        playerController.push.IsInvert = isInvert;
         isReset = false;
 
-        if(getInteract == false || pull.CanPullOnly) return;
+        if (isInvert)
+        {
+            Vector3 current = playerController.push.PushDirection;
+            current = new Vector3(current.z, current.y, current.x);
+            playerController.push.PushDirection = current;
+        }
 
+        if(getInteract == false || pull.CanPullOnly) return;
         rb.mass = minMass;
     }
 
@@ -133,8 +152,15 @@ public class PushObject : InteractionObject
     {
         if (other.CompareTag("PushInvWall"))
         {
-            canPush = false;
-            playerController.move.CanMove = false;
+            isAtLimit = true;
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("PushInvWall"))
+        {
+            isAtLimit = false;
+            playerController.push.IsAtLimit = false;
         }
     }
 }

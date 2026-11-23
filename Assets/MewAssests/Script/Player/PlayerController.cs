@@ -155,7 +155,7 @@ public class PlayerController : Controller
 
         if (push.IsHold)
         {
-            if(push.PushDirection.x != 0)
+            if(push.PushDirection.x == 1 || push.PushDirection.x == -1)
             {
                 move.MoveDirection.z = 0;
                 if (push.IsPull)
@@ -168,6 +168,15 @@ public class PlayerController : Controller
                 }
                 else
                 {
+                    if(push.IsAtLimit && ((!push.IsInvert && move.MoveDirection.x != push.PushDirection.x) || (push.IsInvert && move.MoveDirection.x == push.PushDirection.x)))
+                    {
+                        move.CanMove = false;
+                    }
+                    else if (push.IsAtLimit && ((!push.IsInvert && move.MoveDirection.x == push.PushDirection.x) || (push.IsInvert && move.MoveDirection.x != push.PushDirection.x)))
+                    {
+                        move.CanMove = true;
+                    }
+
                     if (move.MoveDirection.x != 0)
                     {
                         move.IsWalking = true;
@@ -175,7 +184,7 @@ public class PlayerController : Controller
                     return;
                 }
             }
-            else if (push.PushDirection.z != 0)
+            else if (push.PushDirection.z == 1 || push.PushDirection.z == -1)
             {
                 move.MoveDirection.x = 0;
                 if (push.IsPull)
@@ -188,6 +197,15 @@ public class PlayerController : Controller
                 }
                 else
                 {
+                    if(push.IsAtLimit && move.MoveDirection.z != push.PushDirection.z)
+                    {
+                        move.CanMove = false;
+                    }
+                    else if (push.IsAtLimit && move.MoveDirection.z == push.PushDirection.z)
+                    {
+                        move.CanMove = true;
+                    }
+
                     if (move.MoveDirection.z != 0)
                     {
                         move.IsWalking = true;
@@ -200,7 +218,7 @@ public class PlayerController : Controller
         if (climb.IsHold && !climb.IsUp)
         {
 
-            if(climb.WallDirection.x != 0)
+            if(climb.WallDirection.x == 1 || climb.WallDirection.x == -1)
             {
                 move.MoveDirection.x = 0f;
                 if (move.MoveDirection.z != 0)
@@ -209,7 +227,7 @@ public class PlayerController : Controller
                 }
                 return;
             }
-            else if(climb.WallDirection.z != 0)
+            else if(climb.WallDirection.z == 1 || climb.WallDirection.z == -1)
             {
                 move.MoveDirection.z = 0f;
                 if (move.MoveDirection.x != 0)

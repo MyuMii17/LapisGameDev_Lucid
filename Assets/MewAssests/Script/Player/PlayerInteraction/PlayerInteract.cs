@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerInteract : PlayerInteraction
 {
+    public bool diamond;
+    public bool ruby;
     protected override void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(targetTag) && currentInteractable == null)

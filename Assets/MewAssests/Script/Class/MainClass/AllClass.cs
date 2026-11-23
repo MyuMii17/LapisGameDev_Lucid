@@ -54,6 +54,8 @@ public class PushInteract
 {
     public bool IsHold;
     public bool CanHold;
+    public bool IsInvert;
+    public bool IsAtLimit;
     public Vector3 PushDirection;
     public float RayRange;
     public float RayHeight;

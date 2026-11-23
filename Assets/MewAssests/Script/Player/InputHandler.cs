@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -77,7 +78,7 @@ public class InputHandler : MonoBehaviour
             }
         }
 
-        if (interactAction.triggered && playerPush.currentInteractable != null && playerClimb.currentInteractable == null && playerPick.currentInteractable == null && !playerController.move.IsJumping && !playerPush.target.pull.IsEndPull)
+        if (interactAction.triggered && playerPush.currentInteractable != null && playerClimb.currentInteractable == null && playerPick.currentInteractable == null && !playerController.move.IsJumping && !playerPush.target.pull.IsEndPull && !playerController.move.IsJumping && playerPush.target.canPush)
         {
             playerController.push.IsHold = !playerController.push.IsHold;
             if (playerController.push.IsHold == true)
@@ -91,6 +92,18 @@ public class InputHandler : MonoBehaviour
                     Vector3 pushDirection = -hit.normal;
                     pushDirection.y = 0f;
 
+                    float directionX = Mathf.Abs(pushDirection.x);
+                    float directionZ = Mathf.Abs(pushDirection.z);
+
+                    if (directionX > directionZ)
+                    {
+                        pushDirection = new Vector3(Mathf.Sign(pushDirection.x), 0, 0);
+                    }
+                    else
+                    {
+                        pushDirection = new Vector3(0, 0, Mathf.Sign(pushDirection.z));
+                    }
+
                     playerController.move.MoveDirection = pushDirection;
                     playerController.push.PushDirection = pushDirection;
 
@@ -99,7 +112,7 @@ public class InputHandler : MonoBehaviour
             }
             playerPush.OnInteract();
         }
-        else if(interactAction.triggered && playerClimb.currentInteractable != null && playerClimb.climbTarget.canClimb && playerPush.currentInteractable == null && playerPick.currentInteractable == null)
+        else if(interactAction.triggered && playerClimb.currentInteractable != null && playerClimb.climbTarget.canClimb && playerPush.currentInteractable == null && playerPick.currentInteractable == null && !playerController.move.IsGrounded)
         {
             playerController.climb.IsHold = !playerController.climb.IsHold;
             playerController.ResetVelocity();
@@ -120,6 +133,18 @@ public class InputHandler : MonoBehaviour
                     Vector3 wallDirection = -hit.normal;
                     wallDirection.y = 0f;
 
+                    float directionX = Mathf.Abs(wallDirection.x);
+                    float directionZ = Mathf.Abs(wallDirection.z);
+
+                    if (directionX > directionZ)
+                    {
+                        wallDirection = new Vector3(Mathf.Sign(wallDirection.x), 0, 0);
+                    }
+                    else
+                    {
+                        wallDirection = new Vector3(0, 0, Mathf.Sign(wallDirection.z));
+                    }
+                    
                     playerController.move.MoveDirection = wallDirection;
                     playerController.climb.WallDirection = wallDirection;
 

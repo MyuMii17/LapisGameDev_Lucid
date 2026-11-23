@@ -39,6 +39,7 @@ public class PlayerClimb : PlayerInteraction
             }
             climbTarget = null;
             currentInteractable = null;
+            
         } 
     }
 

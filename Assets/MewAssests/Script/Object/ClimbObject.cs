@@ -1,16 +1,28 @@
+using System.Collections;
 using UnityEngine;
 
 public class ClimbObject : InteractionObject
 {
+    public GameObject parent;
+    private Animator animator;
     private PlayerClimb playerClimb;
     private Rigidbody playerRb;
+    public float rangeX;
     public float rangeY;
+    public float rangeZ;
     public bool isUp;
     public bool isReadyUp;
     public bool canClimb;
+    public bool hasAnimation;
+    public bool isStartAnimation;
+    public string animationName;
     void Awake()
     {
         canClimb = true;
+        if (hasAnimation)
+        {
+            animator = parent.GetComponent<Animator>();
+        }
     }
 
     void Update()
@@ -19,6 +31,17 @@ public class ClimbObject : InteractionObject
 
         if(playerClimb.isInteract == true && !playerController.move.IsJumping)
         {
+            if (hasAnimation)
+            {
+                player.transform.position = new Vector3(transform.position.x - rangeX, transform.position.y - rangeY, transform.position.z - rangeZ);
+
+                if (!isStartAnimation)
+                {
+                    isStartAnimation = true;
+                    StartCoroutine(OnPlayAnimation());
+                }
+                return;
+            }
             if (!isUp)
             {
                 player.transform.position = new Vector3(player.transform.position.x, transform.position.y - rangeY, player.transform.position.z);
@@ -52,6 +75,17 @@ public class ClimbObject : InteractionObject
             playerController = null;
             playerRb = null;
         }
+    }
+    IEnumerator OnPlayAnimation()
+    {
+        animator.SetTrigger("Start");
+
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName(animationName));
+
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+
+        animator.enabled = false;
+
     }
     public override void GetInteract(GameObject interactor)
     {

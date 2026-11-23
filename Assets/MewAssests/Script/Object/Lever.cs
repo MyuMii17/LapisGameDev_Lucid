@@ -17,6 +17,11 @@ public class Lever : InteractObject
 
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
         
+        if(cutscene.HasCutscene)
+        {
+            cutsceneManager.PlayerCutScene(cutscene.CutsceneNumber);
+        }
+
         if(isOneTimeAnimaion) yield break;
 
         interactCorutine = null;

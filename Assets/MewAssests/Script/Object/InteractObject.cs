@@ -9,7 +9,8 @@ public class InteractObject : InteractionObject
     public string animationName;
     public string animationTrigger;
     public bool isOneTimeAnimaion;
-    void Awake()
+    public bool canInteract;
+    protected virtual void Awake()
     {
         animator = GetComponentInParent<Animator>();
     }
