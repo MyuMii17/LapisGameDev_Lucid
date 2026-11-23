@@ -1605,6 +1605,7 @@ MonoBehaviour:
     CutsceneNumber: 0
   getInteract: 0
   parent: {fileID: 0}
+  isSetPosition: 0
   rangeX: 0
   rangeY: 3
   rangeZ: 0
@@ -1726,6 +1727,7 @@ MonoBehaviour:
     CutsceneNumber: 0
   getInteract: 0
   parent: {fileID: 0}
+  isSetPosition: 0
   rangeX: 0
   rangeY: 48
   rangeZ: 0
@@ -3092,6 +3094,7 @@ MonoBehaviour:
     CutsceneNumber: 0
   getInteract: 0
   parent: {fileID: 0}
+  isSetPosition: 0
   rangeX: 0
   rangeY: 3
   rangeZ: 0
@@ -4195,7 +4198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1863859745038999762, guid: f51eedff76d696b45bc0af0107afc27c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 44.89
+      value: -27.1
       objectReference: {fileID: 0}
     - target: {fileID: 1863859745038999762, guid: f51eedff76d696b45bc0af0107afc27c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5612,6 +5615,7 @@ MonoBehaviour:
     CutsceneNumber: 0
   getInteract: 0
   parent: {fileID: 0}
+  isSetPosition: 0
   rangeX: 0
   rangeY: 3
   rangeZ: 0
@@ -6483,6 +6487,7 @@ MonoBehaviour:
     CutsceneNumber: 0
   getInteract: 0
   parent: {fileID: 0}
+  isSetPosition: 0
   rangeX: 0
   rangeY: 3
   rangeZ: 0
@@ -7789,6 +7794,7 @@ MonoBehaviour:
     CutsceneNumber: 0
   getInteract: 0
   parent: {fileID: 0}
+  isSetPosition: 0
   rangeX: 0
   rangeY: 3
   rangeZ: 0
@@ -9003,6 +9009,7 @@ MonoBehaviour:
     CutsceneNumber: 0
   getInteract: 0
   parent: {fileID: 0}
+  isSetPosition: 0
   rangeX: 0
   rangeY: 48
   rangeZ: 0
@@ -12648,6 +12655,7 @@ MonoBehaviour:
     CutsceneNumber: 0
   getInteract: 0
   parent: {fileID: 0}
+  isSetPosition: 0
   rangeX: 0
   rangeY: 3
   rangeZ: 0
@@ -12803,6 +12811,7 @@ MonoBehaviour:
     CutsceneNumber: 0
   getInteract: 0
   parent: {fileID: 1155298510176957355}
+  isSetPosition: 0
   rangeX: 1
   rangeY: 3
   rangeZ: 0
@@ -13071,6 +13080,7 @@ MonoBehaviour:
     CutsceneNumber: 0
   getInteract: 0
   parent: {fileID: 0}
+  isSetPosition: 0
   rangeX: 0
   rangeY: 3
   rangeZ: 0
@@ -14572,6 +14582,7 @@ MonoBehaviour:
     CutsceneNumber: 0
   getInteract: 0
   parent: {fileID: 0}
+  isSetPosition: 0
   rangeX: 0
   rangeY: 3
   rangeZ: 0

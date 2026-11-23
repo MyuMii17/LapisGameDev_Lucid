@@ -30,16 +30,8 @@ public class ClimbObject : InteractionObject
     {
         if(playerClimb == null || !canClimb) return;
 
-        if (!isSetPosition)
-        {
-            isSetPosition = true;
-            player.transform.position = new Vector3(transform.position.x - rangeX, transform.position.y - rangeY, transform.position.z - rangeZ);
-        }
-
         if(playerClimb.isInteract == true && !playerController.move.IsJumping)
         {
-            player.transform.position = new Vector3(transform.position.x - rangeX, transform.position.y - rangeY, transform.position.z - rangeZ);
-
             if (hasAnimation)
             {
                 player.transform.position = new Vector3(transform.position.x - rangeX, transform.position.y - rangeY, transform.position.z - rangeZ);
@@ -53,7 +45,13 @@ public class ClimbObject : InteractionObject
             }
             if (!isUp)
             {
-                player.transform.position = new Vector3(player.transform.position.x, transform.position.y - rangeY, player.transform.position.z);
+                if (!isSetPosition)
+                {
+                    isSetPosition = true;
+                    player.transform.position = new Vector3(transform.position.x - rangeX, transform.position.y - rangeY, transform.position.z - rangeZ);
+                }
+
+                player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
             }
             else if(isUp && !isReadyUp)
             {
