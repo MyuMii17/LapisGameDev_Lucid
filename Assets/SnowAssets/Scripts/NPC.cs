@@ -16,7 +16,7 @@ public class NPC : InteractionObject
         player = interactor;
         playerController = interactor.GetComponentInChildren<PlayerController>();
         playerInteract = interactor.GetComponentInChildren<PlayerInteract>();
-        getInteract = playerController.pick.IsHold;
+        getInteract = playerController.interact.IsHold;
 
         playerInteract.isInteract = getInteract;
 
