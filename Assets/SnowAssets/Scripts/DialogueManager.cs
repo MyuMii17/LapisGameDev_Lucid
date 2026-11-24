@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
@@ -10,6 +11,9 @@ public class DialogueManager : MonoBehaviour
 
     public bool IsDialogueActive { get; private set; }
 
+    public event Action<string> RepeatNodeChangeRequested;
+    public event Action DialogueEnded;
+
     private void Awake()
     {
         dialogueUI.CloseRequested += EndDialogue;
@@ -21,19 +25,24 @@ public class DialogueManager : MonoBehaviour
             dialogueUI.CloseRequested -= EndDialogue;
     }
 
-    public bool StartDialogue(DialogueAsset dialogue)
+    public bool StartDialogue(
+        DialogueAsset dialogue,
+        string startNodeId = null)
     {
         if (IsDialogueActive || dialogue == null)
             return false;
 
         dialogue.Initialize();
 
-        DialogueNodeData rootNode = dialogue.GetRootNode();
+        DialogueNodeData rootNode =
+            string.IsNullOrEmpty(startNodeId)
+                ? dialogue.GetRootNode()
+                : dialogue.GetNode(startNodeId);
 
         if (rootNode == null)
         {
             Debug.LogError(
-                $"Dialogue '{dialogue.name}' has no valid root node.",
+                $"Starting dialogue node '{startNodeId}' could not be found in '{dialogue.name}'.",
                 dialogue
             );
 
@@ -61,11 +70,43 @@ public class DialogueManager : MonoBehaviour
 
         dialogueUI.ShowNode(
             currentNode,
-            SelectChoice
+            SelectChoice,
+            ContinueDialogue
         );
     }
 
-    private void SelectChoice(string nextNodeId)
+    private void SelectChoice(DialogueChoiceData choice)
+    {
+        if (choice == null)
+            return;
+
+        // Update the NPC's repeat node only when requested.
+        if (choice.updateRepeatNode)
+        {
+            if (string.IsNullOrWhiteSpace(choice.repeatNodeId))
+            {
+                Debug.LogWarning(
+                    $"Choice '{choice.choiceText}' has repeat node updating enabled, but no repeat node ID was assigned.",
+                    currentDialogue
+                );
+            }
+            else
+            {
+                RepeatNodeChangeRequested?.Invoke(
+                    choice.repeatNodeId
+                );
+            }
+        }
+
+        NavigateToNode(choice.nextNodeId);
+    }
+
+    private void ContinueDialogue(string nextNodeId)
+    {
+        NavigateToNode(nextNodeId);
+    }
+
+    private void NavigateToNode(string nextNodeId)
     {
         if (!IsDialogueActive || currentDialogue == null)
             return;
@@ -100,5 +141,7 @@ public class DialogueManager : MonoBehaviour
         currentNode = null;
 
         dialogueUI.HideDialogue();
+
+        DialogueEnded?.Invoke();
     }
 }

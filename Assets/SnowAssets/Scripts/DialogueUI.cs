@@ -8,9 +8,11 @@ public class DialogueUI : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private GameObject dialoguePanel;
+    [SerializeField] private TextMeshProUGUI speakerNameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private Transform choiceContainer;
     [SerializeField] private Button choiceButtonPrefab;
+    [SerializeField] private Button nextButton;
     [SerializeField] private Button closeButton;
 
     private readonly List<Button> activeButtons = new();
@@ -28,34 +30,51 @@ public class DialogueUI : MonoBehaviour
 
     public void ShowNode(
         DialogueNodeData node,
-        Action<string> onChoiceSelected)
+        Action<DialogueChoiceData> onChoiceSelected,
+        Action<string> onContinue)
     {
         if (node == null)
             return;
 
         dialoguePanel.SetActive(true);
 
+        speakerNameText.text = node.speakerName;
         dialogueText.text = node.dialogueText;
 
         ClearChoices();
 
-        bool hasChoices = node.choices != null &&
-                          node.choices.Count > 0;
+        nextButton.gameObject.SetActive(false);
+        closeButton.gameObject.SetActive(false);
 
-        closeButton.gameObject.SetActive(!hasChoices);
-
-        if (!hasChoices)
-            return;
-
-        foreach (DialogueChoiceData choice in node.choices)
+        if (node.choices != null && node.choices.Count > 0)
         {
-            CreateChoiceButton(choice, onChoiceSelected);
+            foreach (DialogueChoiceData choice in node.choices)
+            {
+                CreateChoiceButton(choice, onChoiceSelected);
+            }
+        }
+        else if (!string.IsNullOrEmpty(node.nextNodeId))
+        {
+            nextButton.gameObject.SetActive(true);
+
+            nextButton.onClick.RemoveAllListeners();
+
+            string targetNodeId = node.nextNodeId;
+
+            nextButton.onClick.AddListener(() =>
+            {
+                onContinue?.Invoke(targetNodeId);
+            });
+        }
+        else
+        {
+            closeButton.gameObject.SetActive(true);
         }
     }
 
     private void CreateChoiceButton(
         DialogueChoiceData choice,
-        Action<string> onChoiceSelected)
+        Action<DialogueChoiceData> onChoiceSelected)
     {
         Button button = Instantiate(
             choiceButtonPrefab,
@@ -68,11 +87,9 @@ public class DialogueUI : MonoBehaviour
         if (buttonText != null)
             buttonText.text = choice.choiceText;
 
-        string targetNodeId = choice.nextNodeId;
-
         button.onClick.AddListener(() =>
         {
-            onChoiceSelected?.Invoke(targetNodeId);
+            onChoiceSelected?.Invoke(choice);
         });
 
         activeButtons.Add(button);
@@ -93,7 +110,9 @@ public class DialogueUI : MonoBehaviour
     {
         ClearChoices();
 
+        nextButton.gameObject.SetActive(false);
         closeButton.gameObject.SetActive(false);
+
         dialoguePanel.SetActive(false);
     }
 }
