@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject Player;
+    public GameObject mainCam;
+    public GameObject player;
     public bool isGameStart;
     public bool canStart;
     private static GameManager Instance = null;
@@ -20,7 +21,8 @@ public class GameManager : MonoBehaviour
         if(canStart && !isGameStart)
         {
             isGameStart = true;
-            Player.SetActive(true);
+            player.SetActive(true);
+            mainCam.SetActive(true);
         }
     }
     public void OnGameStart()

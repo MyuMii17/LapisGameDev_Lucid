@@ -93,7 +93,7 @@ public class PlayerController : Controller
     }
     void FixedUpdate()
     {
-        if(move.IsSliding && !move.OnSlide && move.CanMove && !move.IsCrouching)
+        if(move.IsSliding && !move.OnSlide && move.CanMove)
         {
             move.OnSlide = true;
             move.MovePower = move.WalkSpeed * move.SlideMultiplier;

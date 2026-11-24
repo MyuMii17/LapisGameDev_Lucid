@@ -57,7 +57,7 @@ public class InputHandler : MonoBehaviour
         if (moveAction.IsPressed())
         {
             playerController.Move();
-            playerController.move.IsRunning = runAction.IsPressed() && playerController.move.IsWalking;
+            playerController.move.IsRunning = runAction.IsPressed() && playerController.move.IsWalking && !playerController.move.IsCrouching;
             // moveCommand.Excute() Interesting Idea
         }
         else
