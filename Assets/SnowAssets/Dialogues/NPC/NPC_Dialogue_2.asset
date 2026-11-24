@@ -16,52 +16,86 @@ MonoBehaviour:
   nodes:
   - nodeId: 0
     speakerName: ???
-    dialogueText: Hi there.
+    dialogueText: Urg....
     choices: []
     nextNodeId: 1
   - nodeId: 1
-    speakerName: ???
-    dialogueText: Would you like to sign my petition?
-    choices:
-    - choiceText: Sigh
-      nextNodeId: 2
-      updateRepeatNode: 1
-      repeatNodeId: 4
-    - choiceText: Ignore
-      nextNodeId: 3
-      updateRepeatNode: 0
-      repeatNodeId: 
-    nextNodeId: 
-  - nodeId: 2
-    speakerName: ???
-    dialogueText: Thanks for signing
+    speakerName: P1
+    dialogueText: Hmm? Anyone There?
     choices: []
-    nextNodeId: 4
+    nextNodeId: 2
+  - nodeId: 2
+    speakerName: P1
+    dialogueText: Are you alright?
+    choices: []
+    nextNodeId: 3
   - nodeId: 3
     speakerName: ???
-    dialogueText: See you later.
-    choices: []
+    dialogueText: Who's there?! Go away!
+    choices:
+    - choiceText: Don't panic, I won't do anything
+      nextNodeId: 4
+      updateRepeatNode: 0
+      repeatNodeId: 
+    - choiceText: '*Ignore*'
+      nextNodeId: 5
+      updateRepeatNode: 1
+      repeatNodeId: 3
     nextNodeId: 
   - nodeId: 4
     speakerName: ???
-    dialogueText: How can I help?
-    choices:
-    - choiceText: I want a key
-      nextNodeId: 5
-      updateRepeatNode: 0
-      repeatNodeId: 
-    - choiceText: Do you know Da Way?
-      nextNodeId: 6
-      updateRepeatNode: 0
-      repeatNodeId: 
-    nextNodeId: 
+    dialogueText: My leg.. it hurt so much
+    choices: []
+    nextNodeId: 6
   - nodeId: 5
     speakerName: ???
-    dialogueText: Here it's yours, my friend
+    dialogueText: ...
     choices: []
     nextNodeId: 
   - nodeId: 6
+    speakerName: P1
+    dialogueText: What happened? Why is your leg hurt?
+    choices: []
+    nextNodeId: 7
+  - nodeId: 7
     speakerName: ???
-    dialogueText: Yes, I know Da Way, my brothers
+    dialogueText: 'I tried to get out of this room,
+
+      but I fell from a very high place.
+
+      Now I can''t move.'
+    choices: []
+    nextNodeId: 8
+  - nodeId: 8
+    speakerName: P1
+    dialogueText: So, what were you doing up there in such a high place?
+    choices:
+    - choiceText: Going up to enjoy the view?
+      nextNodeId: 9
+      updateRepeatNode: 1
+      repeatNodeId: 8
+    - choiceText: Is there an exit up there?
+      nextNodeId: 10
+      updateRepeatNode: 1
+      repeatNodeId: 8
+    nextNodeId: 
+  - nodeId: 9
+    speakerName: ???
+    dialogueText: "...\r\nDo you think that\u2019s funny?"
+    choices: []
+    nextNodeId: 10
+  - nodeId: 10
+    speakerName: ???
+    dialogueText: There are some things upstairs that need to be retrieved.
+    choices: []
+    nextNodeId: 11
+  - nodeId: 11
+    speakerName: ???
+    dialogueText: "I don\u2019t think I can go on any further.\r\nWhy don\u2019t you take care of the rest?\r\nAnd let me know when you\u2019re finished."
+    choices: []
+    nextNodeId: 12
+  - nodeId: 12
+    speakerName: P1
+    dialogueText: Understood
     choices: []
     nextNodeId: 
