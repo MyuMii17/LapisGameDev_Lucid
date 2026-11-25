@@ -20,7 +20,7 @@ public class ExitTrigger : MonoBehaviour
     IEnumerator OnMenu()
     {
         yield return new WaitForSeconds(0.25f);
-        gameManager.MenuUiSet();
+        gameManager.OnWake(true);
         gameManager.isGameOver = true;
     }
 }

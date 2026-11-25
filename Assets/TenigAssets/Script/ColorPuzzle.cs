@@ -26,8 +26,9 @@ public class ColorPuzzle : InteractObject
     public UnityEvent onWrongCode;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         passwordUi.gameObject.SetActive(false);
         textMesh.gameObject.SetActive(false);
     }
@@ -41,8 +42,12 @@ public class ColorPuzzle : InteractObject
     protected override IEnumerator OnInteract()
     {
         passwordUi.gameObject.SetActive(true);
+        playerController.ResetVelocity();
+        playerController.StopSound();
         playerController.enabled = false;
-        return base.OnInteract();
+        
+        yield return null;
+        interactCorutine = null;
     }
 
     public void PressColor(CodeColor color)
@@ -55,11 +60,11 @@ public class ColorPuzzle : InteractObject
 
         if(inputColor.SequenceEqual(correctColors))
         {
+            animator.SetTrigger("Start");
             unlocked = true;
             playerController.enabled = true;
             passwordUi.gameObject.SetActive(false);
             gameObject.SetActive(false);
-            Door.SetActive(false);
             textMesh.gameObject.SetActive(true);
 
             textMesh.text = "Correct";

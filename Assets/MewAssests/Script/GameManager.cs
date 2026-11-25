@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public bool isGameStart;
     public bool canStart;
     public GameObject menuUI;
+    public GameObject deadUI;
+    public GameObject wakeUI;
     public bool isOn;
     [Header("Checkpoint Setting")]
     public bool isOnCheckpoint;
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour
     public GameObject fog;
     private ParticleSystem fogParticle;
     public CameraCheckpoint cameraCheckpoint;
+    public PlayableDirector fogScene;
     public PlayableDirector fade;
     public PlayableDirector fadeIn;
     public List<Animator> animators = new List<Animator>();
@@ -65,9 +68,19 @@ public class GameManager : MonoBehaviour
         isOn = !isOn;
         menuUI.SetActive(isOn);
     }
+    public void OnDead(bool isOn)
+    {
+        deadUI.SetActive(isOn);
+    }
+    public void OnWake(bool isOn)
+    {
+        wakeUI.SetActive(isOn);
+    }
     public void OnRestart()
     {
         if(isOnCheckpoint) return;
+        OnDead(false);
+        OnWake(false);
         SceneManager.LoadScene(0);
     }
 
@@ -82,11 +95,14 @@ public class GameManager : MonoBehaviour
     IEnumerator Checkpoint()
     {
         OnClose();
+        OnDead(false);
+        OnWake(false);
         fade.Play();
 
         yield return new WaitForSeconds(1.5f);
-
+        
         fog.SetActive(false);
+        fogScene.Stop();
         fogParticle.Pause();
         fogParticle.Clear();
 

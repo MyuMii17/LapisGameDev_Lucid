@@ -32,9 +32,10 @@ public class InteractObject : InteractionObject
         playerController = interactor.GetComponentInChildren<PlayerController>();
         playerInteract = interactor.GetComponentInChildren<PlayerInteract>();
 
-        getInteract = playerController.interact.IsHold;
+        getInteract = !getInteract;
         playerInteract.isInteract = getInteract;
 
+        if(getInteract == false) return;
         interactCorutine = StartCoroutine(OnInteract());
     }
 }

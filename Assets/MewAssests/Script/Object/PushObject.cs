@@ -6,6 +6,8 @@ public class PushObject : InteractionObject
     protected PlayerPush playerPush;
     protected Rigidbody rb;
     protected Vector3 startTranform;
+    private bool isDrawerPlay;
+    private SoundController sound;
     public PullObject pull;
     private Animator animator;
     public Animator targetAnimator;
@@ -20,6 +22,7 @@ public class PushObject : InteractionObject
     public bool hasClimb;
     public bool isInvert;
     public bool isAtLimit;
+    public bool canPlay;
     private ClimbObject climbObject;
     void Awake()
     {
@@ -30,6 +33,7 @@ public class PushObject : InteractionObject
         {
             animator = GetComponentInParent<Animator>();
         }
+        sound = GetComponentInParent<SoundController>();
     }
     protected override void Start()
     {
@@ -103,6 +107,10 @@ public class PushObject : InteractionObject
 
         if(playerPush.isInteract == true && isGrounded)
         {
+            // rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+            Vector3 direction = playerController.move.MoveDirection;
+            direction.y = 0;
+            rb.linearVelocity = playerController.move.IsWalking? (direction * (playerController.move.MovePower + 0.25f)) : Vector3.zero;
             if (isAtLimit)
             {
                 playerController.push.IsAtLimit = true;
@@ -112,10 +120,19 @@ public class PushObject : InteractionObject
                     return;
                 }
             }
-            // rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
-            Vector3 direction = playerController.move.MoveDirection;
-            direction.y = 0;
-            rb.linearVelocity = playerController.move.IsWalking? (direction * (playerController.move.MovePower + 0.25f)) : Vector3.zero;
+            if(sound != null)
+            {
+                if(rb.linearVelocity != Vector3.zero && !isDrawerPlay)
+                {
+                    isDrawerPlay = true;
+                    sound.sources[0].Play();
+                }
+                else if(rb.linearVelocity == Vector3.zero)
+                {
+                    isDrawerPlay = false;
+                    sound.sources[0].Stop();
+                }
+            }
             if (hasClimb)
             {
                 if(transform.position != startTranform)
@@ -142,6 +159,9 @@ public class PushObject : InteractionObject
             playerController.move.CanMove = true;
             playerController.push.IsAtLimit = false;
             playerController.push.IsInvert = false;
+
+            isDrawerPlay = false;
+            sound.sources[0].Stop();
 
             rb.linearVelocity = Vector3.zero;
             rb.mass = maxMass;
@@ -188,6 +208,7 @@ public class PushObject : InteractionObject
         {
             isAtLimit = false;
             playerController.push.IsAtLimit = false;
+            rb.linearVelocity = Vector3.zero;
         }
     }
 }

@@ -9,6 +9,9 @@ using UnityEngine.InputSystem;
 public class PlayerController : Controller
 {
     private Rigidbody rb;
+    public SoundController sound;
+    private bool isWalkPlay;
+    private bool isRunPlay;
     private GameManager gameManager;
     private InputAction moveAction;
     private Vector3 currentRotation;
@@ -37,6 +40,7 @@ public class PlayerController : Controller
         animator = GetComponent<Animator>();
         collider = GetComponent<CapsuleCollider>();
         move.CanMove = true;
+        sound = GetComponentInChildren<SoundController>();
     }
     void Start()
     {
@@ -52,6 +56,7 @@ public class PlayerController : Controller
     {
         if(gameManager.isGameOver || gameManager.isOnCheckpoint)
         {
+            sound.sources[0].Stop();
             return;
         }
 
@@ -94,6 +99,7 @@ public class PlayerController : Controller
     {
         if(gameManager.isGameOver || gameManager.isOnCheckpoint)
         {
+            sound.sources[0].Stop();
             return;
         }
 
@@ -110,9 +116,21 @@ public class PlayerController : Controller
         }
         if (move.IsWalking && !move.IsSliding && move.CanMove)
         {   
+            if (!isWalkPlay && move.IsGrounded && !move.IsSliding)
+            {
+                isWalkPlay = true;
+                sound.sources[0].Play();
+            }
+            if (move.IsRunning)
+            {
+                sound.sources[0].pitch = 1.25f;
+            }
+            else
+            {
+                sound.sources[0].pitch = 1;
+            }
             move.MovePower = move.WalkSpeed * (push.IsHold || climb.IsHold || (move.IsCrouching && !move.IsSliding)? 0.5f : 
             (move.IsRunning? move.RunMultiplier : 1));
-
             Vector3 velocity = rb.linearVelocity;
 
             if (climb.IsHold && climb.IsUp)
@@ -136,12 +154,19 @@ public class PlayerController : Controller
         }
         else if(!move.IsWalking && !move.IsSliding || !move.CanMove)
         {
+            isWalkPlay = false;
+            sound.sources[0].Stop();
             if (climb.IsUp)
             {
                 rb.linearVelocity = Vector3.zero;
             }
 
             rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+        }
+        if (!move.IsGrounded)
+        {
+            isWalkPlay = false;
+            sound.sources[0].Stop();
         }
         if (!move.IsJumping && !move.IsGrounded && move.CanJump && !push.IsHold)
         {
@@ -269,6 +294,12 @@ public class PlayerController : Controller
         slideCoroutine = null;
     }
 
+    public void StopSound()
+    {
+        isWalkPlay = false;
+        isRunPlay = false;
+        sound.sources[0].Stop();
+    }
     public void ResetVelocity()
     { 
         rb.linearVelocity = Vector3.zero;

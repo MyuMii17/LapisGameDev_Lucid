@@ -11,7 +11,7 @@ public class FogTriggerPlayer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            gameManager.MenuUiSet();
+            gameManager.OnDead(true);
             gameManager.isGameOver = true;
         }
     }

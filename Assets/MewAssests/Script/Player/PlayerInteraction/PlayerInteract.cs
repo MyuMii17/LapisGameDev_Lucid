@@ -34,6 +34,9 @@ public class PlayerInteract : PlayerInteraction
 
     public override void OnInteract()
     {
-        currentInteractable.GetInteract(player);
+        if(currentInteractable != null)
+        {
+            currentInteractable.GetInteract(player);
+        }
     }
 }
