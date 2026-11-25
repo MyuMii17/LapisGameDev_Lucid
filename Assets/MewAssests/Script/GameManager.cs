@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     {
         if(Instance == null) Instance = this;
         else Destroy(gameObject);
-        if(Instance != null) DontDestroyOnLoad(gameObject);
+        //if(Instance != null) DontDestroyOnLoad(gameObject);
 
         fogParticle = fog.GetComponent<ParticleSystem>();
     }
@@ -48,6 +48,9 @@ public class GameManager : MonoBehaviour
         if(canStart && !isGameStart)
         {
             isGameStart = true;
+            isGameOver = false;
+            isOnCheckpoint = false;
+            isOn = false;
             player.SetActive(true);
             mainCam.SetActive(true);
         }
@@ -81,6 +84,8 @@ public class GameManager : MonoBehaviour
         if(isOnCheckpoint) return;
         OnDead(false);
         OnWake(false);
+        canStart = false;
+        isGameStart = false;
         SceneManager.LoadScene(0);
     }
 

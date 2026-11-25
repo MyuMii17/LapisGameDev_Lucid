@@ -5898,7 +5898,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 0.79707897, b: 0.4509434, a: 1}
   m_Intensity: 10
-  m_Range: 80
+  m_Range: 150
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
@@ -10911,6 +10911,75 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2883766279022084530, guid: c106b9530faae3341aea7ea7a5060f6f, type: 3}
+--- !u!1001 &906515801
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3036320505309988243, guid: 4382b2bfb88656147bef3883b31ac9be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 44.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036320505309988243, guid: 4382b2bfb88656147bef3883b31ac9be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036320505309988243, guid: 4382b2bfb88656147bef3883b31ac9be, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036320505309988243, guid: 4382b2bfb88656147bef3883b31ac9be, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036320505309988243, guid: 4382b2bfb88656147bef3883b31ac9be, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036320505309988243, guid: 4382b2bfb88656147bef3883b31ac9be, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036320505309988243, guid: 4382b2bfb88656147bef3883b31ac9be, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036320505309988243, guid: 4382b2bfb88656147bef3883b31ac9be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036320505309988243, guid: 4382b2bfb88656147bef3883b31ac9be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036320505309988243, guid: 4382b2bfb88656147bef3883b31ac9be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081128083113974450, guid: 4382b2bfb88656147bef3883b31ac9be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081128083113974450, guid: 4382b2bfb88656147bef3883b31ac9be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.3799996
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081128083113974450, guid: 4382b2bfb88656147bef3883b31ac9be, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844524341019540472, guid: 4382b2bfb88656147bef3883b31ac9be, type: 3}
+      propertyPath: m_Name
+      value: Candle (6)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4382b2bfb88656147bef3883b31ac9be, type: 3}
 --- !u!1 &911296712
 GameObject:
   m_ObjectHideFlags: 0
@@ -13328,7 +13397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4988365201891640614, guid: 6722f383caf3bd64e9a46ea36956a43b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -51.61
+      value: -50.28
       objectReference: {fileID: 0}
     - target: {fileID: 4988365201891640614, guid: 6722f383caf3bd64e9a46ea36956a43b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13336,7 +13405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4988365201891640614, guid: 6722f383caf3bd64e9a46ea36956a43b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 24.5251
+      value: 27.49
       objectReference: {fileID: 0}
     - target: {fileID: 4988365201891640614, guid: 6722f383caf3bd64e9a46ea36956a43b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14682,7 +14751,7 @@ Transform:
   m_GameObject: {fileID: 1144724222}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.1, y: 0, z: -2.4}
+  m_LocalPosition: {x: -13.4, y: 0, z: -2.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15042,7 +15111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1028646684363806155, guid: 9c91f482fe21fca4587ad45016537f29, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1878047465420732987, guid: 9c91f482fe21fca4587ad45016537f29, type: 3}
       propertyPath: player
@@ -16385,7 +16454,7 @@ Light:
   serializedVersion: 13
   m_Type: 0
   m_Color: {r: 0.96981126, g: 0.7854482, b: 0.48124593, a: 1}
-  m_Intensity: 3500
+  m_Intensity: 4500
   m_Range: 100
   m_SpotAngle: 47.769608
   m_InnerSpotAngle: 17.312578
@@ -19089,10 +19158,10 @@ Light:
   serializedVersion: 13
   m_Type: 0
   m_Color: {r: 0.96981126, g: 0.7854482, b: 0.48124593, a: 1}
-  m_Intensity: 2500
+  m_Intensity: 2750
   m_Range: 100
-  m_SpotAngle: 122.07237
-  m_InnerSpotAngle: 39.11466
+  m_SpotAngle: 163.14368
+  m_InnerSpotAngle: 91.46158
   m_CookieSize2D: {x: 0.5, y: 0.5}
   m_Shadows:
     m_Type: 2
@@ -46270,7 +46339,7 @@ GameObject:
   - component: {fileID: 9134165682685219796}
   - component: {fileID: 1363277705}
   m_Layer: 10
-  m_Name: Book.007
+  m_Name: CamChange3
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46781,8 +46850,8 @@ Transform:
   m_GameObject: {fileID: 6226256484114725292}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -53.814613, y: 31.364481, z: 25.238888}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -56.97, y: 31.364481, z: 25.238888}
+  m_LocalScale: {x: 0.64126, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 543450651977123501}
@@ -51768,6 +51837,7 @@ SceneRoots:
   - {fileID: 1264946143}
   - {fileID: 976967594}
   - {fileID: 1971628120}
+  - {fileID: 906515801}
   - {fileID: 487130158}
   - {fileID: 1052806507}
   - {fileID: 597763985}
