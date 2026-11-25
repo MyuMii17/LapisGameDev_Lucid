@@ -2623,6 +2623,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 361544187077676799, guid: bb5a835b64a1a844598e5cbfb6934b58, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1174663428}
+    - targetCorrespondingSourceObject: {fileID: 361544187077676799, guid: bb5a835b64a1a844598e5cbfb6934b58, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 685868299}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb5a835b64a1a844598e5cbfb6934b58, type: 3}
 --- !u!4 &272387694 stripped
@@ -7951,6 +7954,79 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6512215089242156330, guid: f56c3dd3bdae39445b904640c71ddedd, type: 3}
+--- !u!1 &685868298
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 685868299}
+  - component: {fileID: 685868301}
+  - component: {fileID: 685868300}
+  m_Layer: 0
+  m_Name: Change (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &685868299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685868298}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 29, y: -0.00000035762787, z: -41}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 272387694}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &685868300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685868298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ce78f4c70db0f4fbff566b76d92866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChangeCamera
+  target: {fileID: 578850279}
+  position:
+    Position: {fileID: 637487168}
+    Speed: 5
+    Smooth: 3
+    CanMove: 0
+    NextPosition: {fileID: 0}
+--- !u!65 &685868301
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685868298}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.01, y: 12.3, z: 11.9}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!64 &686265164
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12171,7 +12247,7 @@ Transform:
   m_GameObject: {fileID: 1010845227}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 14.56, y: 14.210792, z: -11.24}
+  m_LocalPosition: {x: 14.56, y: 14.210792, z: -17.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12215,7 +12291,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.01, y: 12.3, z: 35.9}
+  m_Size: {x: 0.01, y: 12.3, z: 47.8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!64 &1012700760
 MeshCollider:
@@ -15405,7 +15481,7 @@ Transform:
   m_GameObject: {fileID: 1174663427}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 29, y: -0.65, z: -20.1}
+  m_LocalPosition: {x: 29, y: 0, z: -20.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19015,7 +19091,7 @@ Light:
   m_Color: {r: 0.96981126, g: 0.7854482, b: 0.48124593, a: 1}
   m_Intensity: 2500
   m_Range: 100
-  m_SpotAngle: 139.08624
+  m_SpotAngle: 122.07237
   m_InnerSpotAngle: 39.11466
   m_CookieSize2D: {x: 0.5, y: 0.5}
   m_Shadows:
