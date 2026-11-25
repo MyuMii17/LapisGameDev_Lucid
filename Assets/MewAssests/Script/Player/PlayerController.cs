@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : Controller
 {
     private Rigidbody rb;
+    private GameManager gameManager;
     private InputAction moveAction;
     private Vector3 currentRotation;
     private CapsuleCollider collider;
@@ -42,11 +43,18 @@ public class PlayerController : Controller
         rb = GetComponent<Rigidbody>();
         moveAction = InputSystem.actions.FindAction("Move");
         move.CurruntCrouchSizeY = transform.localScale.y;
+
+        gameManager = GameManager.GetInstace();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(gameManager.isGameOver || gameManager.isOnCheckpoint)
+        {
+            return;
+        }
+
         Animation();
 
         if (move.MoveDirection.sqrMagnitude > 0.01f && !push.IsHold && !climb.IsHold && !move.IsSliding)
@@ -64,24 +72,15 @@ public class PlayerController : Controller
         }
         else if (move.IsCrouching)
         {
-            if (move.IsWalking)
-            {
-                collider.height = 2.25f;
-                collider.radius = 1.2f;
-                collider.center = new Vector3(collider.center.x, 1.2f, collider.center.z);
-            }
-            else
-            {
-                collider.height = 3;
-                collider.radius = 0.5f;
-                collider.center = new Vector3(collider.center.x, 1.5f, collider.center.z);
-            }
+            collider.height = 2.7f;
+            collider.radius = 1f;
+            collider.center = new Vector3(collider.center.x, 1.35f, collider.center.z);
         }
         else
         {
-            collider.radius = 0.3f;
-            collider.height = 4.05f;
-            collider.center = new Vector3(collider.center.x, 2, collider.center.z);
+            collider.radius = 0.75f;
+            collider.height = 3.5f;
+            collider.center = new Vector3(collider.center.x, 1.6f, collider.center.z);
         }
 
         if (move.IsSliding)
@@ -93,6 +92,11 @@ public class PlayerController : Controller
     }
     void FixedUpdate()
     {
+        if(gameManager.isGameOver || gameManager.isOnCheckpoint)
+        {
+            return;
+        }
+
         if(move.IsSliding && !move.OnSlide && move.CanMove)
         {
             move.OnSlide = true;

@@ -6,6 +6,7 @@ public class InputHandler : MonoBehaviour
 {
     //private ICommand moveCommand; Interesting Idea
     public PullObject pullObject;
+    private GameManager gameManager;
     private PlayerController playerController;
     private PlayerPush playerPush;
     private PlayerClimb playerClimb;
@@ -16,6 +17,7 @@ public class InputHandler : MonoBehaviour
     private InputAction jumpAction;
     private InputAction interactAction;
     private InputAction crouchAction;
+    private InputAction menuAction;
     public Transform crouchRayPosition;
     public float rayRange;
     public int objectLayer;
@@ -41,10 +43,14 @@ public class InputHandler : MonoBehaviour
         jumpAction = InputSystem.actions.FindAction("Jump");
         interactAction = InputSystem.actions.FindAction("Interact");
         crouchAction = InputSystem.actions.FindAction("Crouch");
+        menuAction = InputSystem.actions.FindAction("Menu");
+
+        gameManager = GameManager.GetInstace();
     }
 
     void Update()
     {
+        if(gameManager.isOnCheckpoint || gameManager.isGameOver) return;
         Vector3 position1 = transform.position;
         position1.y += playerController.push.RayHeight;
         Debug.DrawRay(position1 , playerController.move.MoveDirection * playerController.climb.RayRange , Color.red);
@@ -181,6 +187,11 @@ public class InputHandler : MonoBehaviour
         else if (!crouchAction.IsPressed() && !isCrouchHit && !playerController.move.IsSliding)
         {
             playerController.move.IsCrouching = false;
+        }
+
+        if (menuAction.WasPerformedThisFrame())
+        {
+            gameManager.MenuUiSet();
         }
     }
 

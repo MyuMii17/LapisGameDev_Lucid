@@ -7,6 +7,11 @@ public class PushObject : InteractionObject
     protected Rigidbody rb;
     protected Vector3 startTranform;
     public PullObject pull;
+    private Animator animator;
+    public Animator targetAnimator;
+    public bool isTrigger;
+    public bool hasTriggerAnim;
+    public string animationTriggerName;
     public float maxMass;
     public float minMass;
     public bool isReset;
@@ -21,6 +26,10 @@ public class PushObject : InteractionObject
         rb = GetComponentInParent<Rigidbody>();
         maxMass = rb.mass;
         startTranform = transform.position;
+        if (hasTriggerAnim)
+        {
+            animator = GetComponentInParent<Animator>();
+        }
     }
     protected override void Start()
     {
@@ -52,14 +61,33 @@ public class PushObject : InteractionObject
             {
                 pull.IsEndPull = true;
                 //runAnimation
+                if (hasTriggerAnim)
+                {
+                    if (isTrigger)
+                    {
+                        animator.SetTrigger(animationTriggerName);
+                        if(targetAnimator != null) targetAnimator.SetTrigger(animationTriggerName);
+                    }
+                    else
+                    {
+                        animator.SetBool(animationTriggerName, true);
+                        if(targetAnimator != null) targetAnimator.SetBool(animationTriggerName, true);
+                    }
+                }
                 if(cutscene.HasCutscene)
                 {
                     cutsceneManager.PlayerCutScene(cutscene.CutsceneNumber);
                 }
+
+                if (pull.CanResetPull)
+                {
+                    pull.IsEndPull = false;
+                }
             }
             playerController.move.MoveDirection = playerController.push.PushDirection;
             playerController.push.PullTime = 0;
-
+            
+            getInteract = false;
             playerPush.isInteract = false;
             playerController.push.IsHold = false;
             playerController.move.CanMove = true;

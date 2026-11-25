@@ -68,6 +68,7 @@ public class PullObject
 {
     public bool CanPullOnly;
     public bool IsEndPull;
+    public bool CanResetPull;
     public float PullInterval;
 }
 

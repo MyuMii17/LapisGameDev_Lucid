@@ -88,7 +88,7 @@ public class ColorPuzzle : InteractObject
     public void ClosePasswordUI()
     {
         playerController.enabled = true;
-
+        playerInteract.OnInteract();
         passwordUi.gameObject.SetActive(false);
     }
 }
