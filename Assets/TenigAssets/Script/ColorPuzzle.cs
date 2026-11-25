@@ -9,6 +9,7 @@ using UnityEngine.Events;
 public enum CodeColor { Blue, Green, Yellow, Red }
 public class ColorPuzzle : InteractObject
 {
+    private InputHandler inputHandler;
     [Header("Password")]
     [SerializeField] private List<CodeColor> correctColors = new List<CodeColor> {CodeColor.Blue, CodeColor.Green, CodeColor.Yellow, CodeColor.Red };
     private readonly List<CodeColor> inputColor = new List<CodeColor>();
@@ -41,10 +42,12 @@ public class ColorPuzzle : InteractObject
 
     protected override IEnumerator OnInteract()
     {
+        inputHandler = playerController.gameObject.GetComponent<InputHandler>();
         passwordUi.gameObject.SetActive(true);
         playerController.ResetVelocity();
         playerController.StopSound();
         playerController.enabled = false;
+        inputHandler.enabled = false;
         
         yield return null;
         interactCorutine = null;
@@ -63,6 +66,7 @@ public class ColorPuzzle : InteractObject
             animator.SetTrigger("Start");
             unlocked = true;
             playerController.enabled = true;
+            inputHandler.enabled = true;
             passwordUi.gameObject.SetActive(false);
             gameObject.SetActive(false);
             textMesh.gameObject.SetActive(true);
@@ -92,6 +96,7 @@ public class ColorPuzzle : InteractObject
 
     public void ClosePasswordUI()
     {
+        inputHandler.enabled = true;
         playerController.enabled = true;
         playerInteract.OnInteract();
         passwordUi.gameObject.SetActive(false);

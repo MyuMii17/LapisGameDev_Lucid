@@ -161,7 +161,10 @@ public class PushObject : InteractionObject
             playerController.push.IsInvert = false;
 
             isDrawerPlay = false;
-            sound.sources[0].Stop();
+            if(sound != null)
+            {
+                sound.sources[0].Stop();
+            }
 
             rb.linearVelocity = Vector3.zero;
             rb.mass = maxMass;
